@@ -8,10 +8,31 @@
   "projects": {
     "angular2026q2": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "inlineStyle": false,
+          "inlineTemplate": false,
+          "type": "component",
+          "style": "scss",
+          "path": "ui/components"
+        },
+        "@schematics/angular:directive": {
+          "type": "directive",
+          "path": "ui/directives"
+        },
+        "@schematics/angular:pipe": {
+          "typeSeparator": ".",
+          "path": "ui/pipes"
+        },
+        "@schematics/angular:service": {
+          "type": "service",
+          "path": "services"
+        },
+        "@schematics/angular:resolver": { "typeSeparator": "." }
+      },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "dashq",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
@@ -24,9 +45,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ]
+            "styles": ["src/styles.css"]
           },
           "configurations": {
             "production": {
