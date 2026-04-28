@@ -28,6 +28,14 @@ export const routes: Routes = [
         },
       },
       {
+        path: 'about',
+        title: 'About app',
+        loadComponent: async () => {
+          const m = await import('./features/about/ui/components/about/about.component');
+          return m.AboutComponent;
+        },
+      },
+      {
         path: '**',
         title: 'Page Not Found',
         loadComponent: async () => {
