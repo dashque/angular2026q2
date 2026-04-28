@@ -84,7 +84,7 @@ export default tseslint.config(
       // import
       'import/extensions': [
         'error',
-        { ts: 'never', config: 'off', routes: 'off', model: 'off', pipe: 'off', directive: 'off' },
+        { ts: 'never', config: 'off', routes: 'off', model: 'off', pipe: 'off', directive: 'off', service: 'off' },
       ],
       'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
       'import/no-cycle': ['error', { maxDepth: Infinity }],
@@ -148,5 +148,5 @@ export default tseslint.config(
       '@angular-eslint/template/eqeqeq': 'error',
       '@angular-eslint/template/prefer-self-closing-tags': 'warn',
     },
-  },
+  }
 );
