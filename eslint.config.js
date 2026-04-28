@@ -52,7 +52,7 @@ export default tseslint.config(
       '@typescript-eslint/explicit-member-accessibility': ['error'],
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
-      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+      '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
       '@typescript-eslint/no-unsafe-return': 'error',
       '@typescript-eslint/no-unsafe-assignment': 'error',
       '@typescript-eslint/naming-convention': [
