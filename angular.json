@@ -4,9 +4,7 @@
   "cli": {
     "packageManager": "pnpm",
     "analytics": false,
-    "schematicCollections": [
-      "@angular-eslint/schematics"
-    ]
+    "schematicCollections": ["@angular-eslint/schematics"]
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -17,20 +15,16 @@
           "inlineStyle": false,
           "inlineTemplate": false,
           "type": "component",
-          "style": "scss",
-          "path": "ui/components"
+          "style": "scss"
         },
         "@schematics/angular:directive": {
-          "type": "directive",
-          "path": "ui/directives"
+          "type": "directive"
         },
         "@schematics/angular:pipe": {
-          "typeSeparator": ".",
-          "path": "ui/pipes"
+          "typeSeparator": "."
         },
         "@schematics/angular:service": {
-          "type": "service",
-          "path": "services"
+          "type": "service"
         },
         "@schematics/angular:resolver": { "typeSeparator": "." }
       },

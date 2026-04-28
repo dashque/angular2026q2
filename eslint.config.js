@@ -89,8 +89,6 @@ export default tseslint.config(
       'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
       'import/no-cycle': ['error', { maxDepth: Infinity }],
       'import/first': 'error',
-      // perfectionist
-      'perfectionist/sort-imports': 'error',
       // stylistic
       '@stylistic/padding-line-between-statements': [
         'error',
