@@ -37,6 +37,9 @@
           "options": {
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
+            "stylePreprocessorOptions": {
+              "includePaths": ["src", "src/styles"]
+            },
             "assets": [
               {
                 "glob": "**/*",
@@ -82,7 +85,12 @@
           "defaultConfiguration": "development"
         },
         "test": {
-          "builder": "@angular/build:unit-test"
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "stylePreprocessorOptions": {
+              "includePaths": ["src", "src/styles"]
+            }
+          }
         }
       }
     }

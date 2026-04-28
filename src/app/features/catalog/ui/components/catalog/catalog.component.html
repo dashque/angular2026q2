@@ -1,5 +1,16 @@
-<p>catalog works!</p>
-
-@for(film of filmList(); track film){
-  <p>{{ film.title }}</p>
-}
+<div class="card-container">
+  @for (film of filmList(); track film) {
+    <div class="card">
+      <div class="film-name">
+        <p>{{ film.title }}</p>
+        <p>{{ film.year }}</p>
+      </div>
+      <div class="film-info">
+        <p>{{ film.genre }}</p>
+        <p>{{ film.rating }}</p>
+        <p>{{ film.isFavorite }}</p>
+      </div>
+      <button type="button">More</button>
+    </div>
+  }
+</div>
