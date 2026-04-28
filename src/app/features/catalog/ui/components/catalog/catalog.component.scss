@@ -12,29 +12,5 @@
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
-}
 
-.card {
-  display: flex;
-  padding: 1rem;
-  flex-direction: column;
-  width: 100%;
-  max-width: 300px;
-  border: 2px solid $border;
-  border-radius: 10px;
-  background-color: $bg-surface;
-
-  &:hover {
-    box-shadow: $focus-ring;
-  }
-
-  .film-name {
-    display: flex;
-    justify-content: space-around;
-  }
-
-  .film-info {
-    display: flex;
-    justify-content: space-around;
-  }
 }

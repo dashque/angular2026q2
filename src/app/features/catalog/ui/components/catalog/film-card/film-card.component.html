@@ -1,0 +1,11 @@
+@let filmInfo = film();
+<div class="film-name">
+  <p>{{ filmInfo.title }}</p>
+  <p>{{ filmInfo.year }}</p>
+</div>
+<div class="film-info">
+  <p>{{ filmInfo.genre }}</p>
+  <p>{{ filmInfo.rating }}</p>
+  <p>{{ filmInfo.isFavorite }}</p>
+</div>
+<div class="film-actions"><button type="button">More</button><button type="button">Add to favorites</button></div>
