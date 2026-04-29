@@ -1,0 +1,49 @@
+name: "Создание бейджа покрытия"
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Установка зависимостей
+        run: npm ci
+
+      - name: Запуск тестов с покрытием
+        run: npm run test:coverage
+
+      # Вариант 1: Генерация SVG-бейджа в репозиторий (простой)
+      - name: Генерация бейджа
+        uses: jaywcjlove/coverage-badges-cli@main
+        with:
+          source: coverage/coverage-summary.json
+          output: coverage/badges.svg
+          label: 'Coverage'
+          style: 'flat'
+          jsonPath: 'total.lines.pct'
+
+      # Вариант 2: Использование готового action для всех типов покрытия
+      - name: Генерация всех бейджей
+        uses: jpb06/jest-badges-action@latest
+        with:
+          branches: main
+          output-folder: 'badges'
+
+      - name: Коммит бейджей в репозиторий
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -f coverage/badges.svg badges/
+          git diff --staged --quiet || git commit -m "Обновление бейджа покрытия"
+          git push

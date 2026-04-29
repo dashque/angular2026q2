@@ -8,6 +8,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "jest",
+    "test:cov": "jest --coverage",
     "lint": "eslint src --fix",
     "format": "prettier src -w",
     "type-check": "tsc --noEmit"

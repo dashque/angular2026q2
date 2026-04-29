@@ -48,6 +48,9 @@ pnpm build
 
 ### 4) Run tests
 
+![Coverage](https://raw.githubusercontent.com/[USERNAME]/[REPO]/main/coverage/badges.svg)
+![Branches](./badges/coverage-branches.svg) ![Lines](./badges/coverage-lines.svg)
+
 ```bash
 pnpm test
 ```
