@@ -1,7 +1,7 @@
 import { computed, inject, Injectable } from '@angular/core';
 
 import type { Film } from '../../models/film.model';
-import { httpResource } from '@angular/common/http';
+import { HttpClient, httpResource } from '@angular/common/http';
 import { FILMS_URL_TOKEN } from '../constants/films-url.token';
 
 @Injectable({
@@ -23,7 +23,8 @@ export class FilmRepositoryService {
   //
   // Film collection in the service — signal()
   // Favorites list — computed()
-  private url = inject(FILMS_URL_TOKEN);
+  private readonly httpClient = inject(HttpClient);
+  private readonly url = inject(FILMS_URL_TOKEN);
   private readonly _filmListResourceRef = httpResource<Film[]>(() => this.url, { defaultValue: [] });
   public readonly favoriteFilmsList = computed(() => {
     return this._filmListResourceRef.value().filter((film: Film) => {
@@ -36,5 +37,17 @@ export class FilmRepositoryService {
 
   public filmDetails!: Film;
 
-  public toggleFavorite(id: number) {}
+  public toggleFavorite(id: number) {
+    const film = this.filmList().find((item: Film) => {
+      return item.id === id;
+    });
+
+    if (!film) {
+      return;
+    }
+
+    this.httpClient.patch<Film>(`${this.url}/${id}`, { isFavorite: !film.isFavorite }).subscribe(() => {
+      this._filmListResourceRef.reload();
+    });
+  }
 }

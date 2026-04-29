@@ -1,2 +1,1 @@
-export const FILMS_URL =
-  'https://cdn.jsdelivr.net/gh/rolling-scopes-school/tasks@master/angular/tasks/angular-intro-task/films.json';
+export const FILMS_URL = 'http://localhost:3001/films';
