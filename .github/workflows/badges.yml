@@ -1,8 +1,8 @@
-name: 'Создание бейджа покрытия'
+name: 'Покрытие'
 
 on:
   push:
-    branches: [dev]
+    branches: [dev, main]
 
 jobs:
   build:
@@ -31,13 +31,13 @@ jobs:
       - name: Генерация всех бейджей
         uses: jpb06/jest-badges-action@latest
         with:
-          branches: dev
+          branches: main,dev
           output-folder: 'badges'
 
       - name: Коммит бейджей в репозиторий
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add -f coverage/badges.svg badges/
+          git add -f badges/
           git diff --staged --quiet || git commit -m "Обновление бейджа покрытия"
           git push

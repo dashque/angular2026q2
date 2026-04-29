@@ -48,8 +48,9 @@ pnpm build
 
 ### 4) Run tests
 
-![Coverage Badge Workflow](https://github.com/dashque/angular2026q2/actions/workflows/badges.yml/badge.svg?branch=main)
-![Quality Check](https://github.com/dashque/angular2026q2/actions/workflows/quality-check.yml/badge.svg?branch=main)
+![Coverage Branches](./badges/coverage-branches.svg)
+![Coverage Functions](./badges/coverage-functions.svg)
+![Coverage Lines](./badges/coverage-lines.svg)
 
 ```bash
 pnpm test
