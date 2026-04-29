@@ -13,6 +13,7 @@ export const routes: Routes = [
         title: 'Catalog',
         loadComponent: async () => {
           const m = await import('./features/catalog/ui/components/catalog/catalog.component');
+
           return m.CatalogComponent;
         },
       },
@@ -24,6 +25,7 @@ export const routes: Routes = [
         },
         loadComponent: async () => {
           const m = await import('./features/film-details/ui/components/film-details/film-details.component');
+
           return m.FilmDetailsComponent;
         },
       },
@@ -32,6 +34,7 @@ export const routes: Routes = [
         title: 'About app',
         loadComponent: async () => {
           const m = await import('./features/about/ui/components/about/about.component');
+
           return m.AboutComponent;
         },
       },
@@ -40,6 +43,7 @@ export const routes: Routes = [
         title: 'Page Not Found',
         loadComponent: async () => {
           const m = await import('./features/not-found/ui/components/not-found/not-found.component');
+
           return m.NotFoundComponent;
         },
       },

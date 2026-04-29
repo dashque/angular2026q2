@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { Film } from '../../../../../../shared/models/film.model';
+import type { Film } from '../../../../../../shared/models/film.model';
 import { NgOptimizedImage } from '@angular/common';
 
 @Component({
@@ -12,8 +12,8 @@ import { NgOptimizedImage } from '@angular/common';
   },
 })
 export class FilmCardComponent {
-  public film = input.required<Film>();
-  public cardClicked = output<number>();
+  public readonly film = input.required<Film>();
+  public readonly cardClicked = output<number>();
 
   public onCardClick() {
     console.log('clicked onCardClick');

@@ -2,7 +2,6 @@ import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import angular from 'angular-eslint';
 import globals from 'globals';
-import pluginObject from 'eslint-plugin-perfectionist';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import stylistic from '@stylistic/eslint-plugin';
 import importPlugin from 'eslint-plugin-import';
@@ -25,7 +24,6 @@ export default tseslint.config(
       ...angular.configs.tsRecommended,
     ],
     plugins: {
-      perfectionist: pluginObject,
       unicorn: eslintPluginUnicorn,
       '@stylistic': stylistic,
       import: importPlugin,
@@ -37,7 +35,7 @@ export default tseslint.config(
         'error',
         {
           type: 'attribute',
-          prefix: 'app',
+          prefix: 'dashq',
           style: 'camelCase',
         },
       ],
@@ -49,7 +47,10 @@ export default tseslint.config(
       // ts
       '@typescript-eslint/no-useless-constructor': ['error'],
       '@typescript-eslint/array-type': ['error', { default: 'array', readonly: 'array' }],
-      '@typescript-eslint/explicit-member-accessibility': ['error'],
+      '@typescript-eslint/explicit-member-accessibility': [
+        'error',
+        { ignoredMethodNames: ['constructor', 'transform'] },
+      ],
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
@@ -84,7 +85,18 @@ export default tseslint.config(
       // import
       'import/extensions': [
         'error',
-        { ts: 'never', config: 'off', routes: 'off', model: 'off', pipe: 'off', directive: 'off', service: 'off' },
+        {
+          ts: 'never',
+          config: 'off',
+          routes: 'off',
+          model: 'off',
+          pipe: 'off',
+          directive: 'off',
+          service: 'off',
+          component: 'off',
+          resolver: 'off',
+          mock: 'off',
+        },
       ],
       'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
       'import/no-cycle': ['error', { maxDepth: Infinity }],

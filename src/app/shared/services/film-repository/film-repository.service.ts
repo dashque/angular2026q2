@@ -35,5 +35,7 @@ export class FilmRepositoryService {
 
   public filmDetails!: Film;
 
-  public toggleFavorite(id: number) {}
+  public toggleFavorite(id: number) {
+    console.log(id);
+  }
 }

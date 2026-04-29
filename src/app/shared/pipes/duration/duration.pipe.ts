@@ -1,4 +1,5 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import type { PipeTransform } from '@angular/core';
+import { Pipe } from '@angular/core';
 
 @Pipe({
   name: 'duration',
@@ -12,6 +13,6 @@ export class DurationPipe implements PipeTransform {
   // Hours and minutes: 90 → "1h 30min"
   // The pipe must be standalone and used in the template of at least one component.
   transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+    console.log(value, args);
   }
 }
