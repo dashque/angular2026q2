@@ -48,8 +48,8 @@ pnpm build
 
 ### 4) Run tests
 
-![Coverage](https://raw.githubusercontent.com/[USERNAME]/[REPO]/main/coverage/badges.svg)
-![Branches](./badges/coverage-branches.svg) ![Lines](./badges/coverage-lines.svg)
+![Coverage Badge Workflow](https://github.com/dashque/angular2026q2/actions/workflows/badges.yml/badge.svg?branch=main)
+![Quality Check](https://github.com/dashque/angular2026q2/actions/workflows/quality-check.yml/badge.svg?branch=main)
 
 ```bash
 pnpm test
