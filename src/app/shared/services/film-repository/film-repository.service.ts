@@ -8,21 +8,6 @@ import { FILMS_URL_TOKEN } from '../constants/films-url.token';
   providedIn: 'root',
 })
 export class FilmRepositoryService {
-  //Service
-  // Create a service for working with film data:
-  //
-  // Stores the film collection in a signal
-  // Provides access to all films
-  // Allows getting a film by id
-  // Allows toggling a film's favorite status
-  // Provides a computed list of favorite films
-  // Registered globally (singleton)
-
-  //Signals
-  // All reactive data in the application is stored and processed via Angular Signals:
-  //
-  // Film collection in the service — signal()
-  // Favorites list — computed()
   private readonly httpClient = inject(HttpClient);
   private readonly url = inject(FILMS_URL_TOKEN);
   private readonly _filmListResourceRef = httpResource<Film[]>(() => this.url, { defaultValue: [] });
@@ -34,8 +19,6 @@ export class FilmRepositoryService {
   public readonly filmList = computed(() => this._filmListResourceRef.value());
   public readonly isLoading = this._filmListResourceRef.isLoading;
   public readonly error = this._filmListResourceRef.error;
-
-  public filmDetails!: Film;
 
   public toggleFavorite(id: number) {
     const film = this.filmList().find((item: Film) => {
@@ -49,5 +32,9 @@ export class FilmRepositoryService {
     this.httpClient.patch<Film>(`${this.url}/${id}`, { isFavorite: !film.isFavorite }).subscribe(() => {
       this._filmListResourceRef.reload();
     });
+  }
+
+  public getFilmDetails(id: number) {
+    return this._filmListResourceRef.value().find((film) => film.id === id);
   }
 }

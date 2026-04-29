@@ -8,6 +8,7 @@ import { ApplicationRef } from '@angular/core';
 import { FILMS_URL } from '../constants/films-url';
 import { filmListFixture } from '../fixtures/film-list.fixture';
 import { favoriteFilmFixture } from '../fixtures/favorite-film.fixture';
+import { filmFixture } from '../fixtures/film.fixture';
 
 describe('FilmRepositoryService', () => {
   let service: FilmRepositoryService;
@@ -47,6 +48,24 @@ describe('FilmRepositoryService', () => {
   describe('Получение избранных фильмов', () => {
     it('должен вернуть только избранные фильмы', () => {
       expect(service.favoriteFilmsList()).toEqual([favoriteFilmFixture]);
+    });
+  });
+
+  describe('Получение деталей фильма', () => {
+    describe('Фильм найден', () => {
+      it('должен вернуть фильм', () => {
+        const resultFixture = service.getFilmDetails(filmFixture.id);
+
+        expect(resultFixture).toEqual(filmFixture);
+      });
+    });
+
+    describe('Фильм не найден', () => {
+      it('должен вернуть undefined', () => {
+        const resultFixture = service.getFilmDetails(999999999);
+
+        expect(resultFixture).toBeUndefined();
+      });
     });
   });
 
