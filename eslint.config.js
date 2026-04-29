@@ -96,6 +96,8 @@ export default tseslint.config(
           component: 'off',
           resolver: 'off',
           mock: 'off',
+          fixture: 'off',
+          token: 'off',
         },
       ],
       'import/no-extraneous-dependencies': ['error', { devDependencies: true }],

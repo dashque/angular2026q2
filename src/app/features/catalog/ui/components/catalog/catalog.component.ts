@@ -29,7 +29,7 @@ export class CatalogComponent {
   // Component interaction — input() / output()
   private filmRepositoryService = inject(FilmRepositoryService);
   private router = inject(Router);
-  public readonly filmList = this.filmRepositoryService.filmsList.value;
+  public readonly filmList = this.filmRepositoryService.filmList;
 
   public onCardClick(filmId: number) {
     void this.router.navigate(['details', filmId]);

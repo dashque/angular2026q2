@@ -7,4 +7,5 @@ export interface Film {
   description: string;
   posterUrl: string;
   isFavorite: boolean;
+  duration: number;
 }

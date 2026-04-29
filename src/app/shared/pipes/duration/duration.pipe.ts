@@ -12,7 +12,7 @@ export class DurationPipe implements PipeTransform {
   // Minutes only: 45 → "45min"
   // Hours and minutes: 90 → "1h 30min"
   // The pipe must be standalone and used in the template of at least one component.
-  transform(value: unknown, ...args: unknown[]): unknown {
+  transform(value: unknown, ...args: unknown[]) {
     console.log(value, args);
   }
 }

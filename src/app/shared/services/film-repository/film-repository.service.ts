@@ -1,7 +1,8 @@
-import { computed, Injectable } from '@angular/core';
+import { computed, inject, Injectable } from '@angular/core';
 
 import type { Film } from '../../models/film.model';
 import { httpResource } from '@angular/common/http';
+import { FILMS_URL_TOKEN } from '../constants/films-url.token';
 
 @Injectable({
   providedIn: 'root',
@@ -22,20 +23,18 @@ export class FilmRepositoryService {
   //
   // Film collection in the service — signal()
   // Favorites list — computed()
-
-  public readonly filmsList = httpResource<Film[]>(
-    () => 'https://cdn.jsdelivr.net/gh/rolling-scopes-school/tasks@master/angular/tasks/angular-intro-task/films.json',
-    { defaultValue: [] }
-  );
+  private url = inject(FILMS_URL_TOKEN);
+  private readonly _filmListResourceRef = httpResource<Film[]>(() => this.url, { defaultValue: [] });
   public readonly favoriteFilmsList = computed(() => {
-    return this.filmsList.value().filter((film: Film) => {
+    return this._filmListResourceRef.value().filter((film: Film) => {
       return film.isFavorite;
     });
   });
+  public readonly filmList = computed(() => this._filmListResourceRef.value());
+  public readonly isLoading = this._filmListResourceRef.isLoading;
+  public readonly error = this._filmListResourceRef.error;
 
   public filmDetails!: Film;
 
-  public toggleFavorite(id: number) {
-    console.log(id);
-  }
+  public toggleFavorite(id: number) {}
 }
