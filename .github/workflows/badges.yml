@@ -1,4 +1,4 @@
-name: 'Покрытие'
+name: 'coverage'
 
 on:
   push:
@@ -22,22 +22,22 @@ jobs:
         with:
           version: 9
 
-      - name: Установка зависимостей
+      - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Запуск тестов с покрытием
+      - name: Run tests with coverage
         run: pnpm test:cov
 
-      - name: Генерация всех бейджей
+      - name: Generate badges
         uses: jpb06/jest-badges-action@latest
         with:
           branches: main,dev
           output-folder: 'badges'
 
-      - name: Коммит бейджей в репозиторий
+      - name: Add badges to repository
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -f badges/
-          git diff --staged --quiet || git commit -m "Обновление бейджа покрытия"
+          git diff --staged --quiet || git commit -m "Update coverage badges"
           git push
