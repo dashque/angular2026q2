@@ -1,11 +1,14 @@
 @let filmInfo = film();
-<div class="film-name">
-  <p>{{ filmInfo.title }}</p>
-  <p>{{ filmInfo.year }}</p>
+<div class="flex flex-col items-center">
+  <img [alt]="filmInfo.title" [ngSrc]="filmInfo.posterUrl" width="200" height="100" />
+  <div class="flex justify-around">
+    <p>{{ filmInfo.title }}</p>
+    <p>{{ filmInfo.year }}</p>
+  </div>
 </div>
-<div class="film-info">
+<div class="flex justify-around">
   <p>{{ filmInfo.genre }}</p>
   <p>{{ filmInfo.rating }}</p>
   <p>{{ filmInfo.isFavorite }}</p>
 </div>
-<div class="film-actions"><button type="button">Add to favorites</button></div>
+<div class="w-full"><button type="button">Add to favorites</button></div>

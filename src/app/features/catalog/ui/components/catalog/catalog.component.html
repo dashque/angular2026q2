@@ -1,4 +1,4 @@
-<div class="card-container">
+<div class="flex flex-wrap gap-4 justify-center">
   @for (film of filmList(); track film) {
     <dashq-film-card [film]="film" (cardClicked)="onCardClick($event)" />
   } @empty {

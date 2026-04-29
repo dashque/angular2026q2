@@ -9,26 +9,9 @@
   border: 2px solid $border;
   border-radius: 10px;
   background-color: $bg-surface;
+  height: fit-content;
 
   &:hover {
     box-shadow: $focus-ring;
-  }
-
-  .film-name {
-    display: flex;
-    justify-content: space-around;
-  }
-
-  .film-info {
-    display: flex;
-    justify-content: space-around;
-  }
-
-  .film-actions{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: space-around;
-    gap: 1rem;
   }
 }

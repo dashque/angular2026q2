@@ -1,9 +1,10 @@
 import { Component, input, output } from '@angular/core';
 import { Film } from '../../../../../../shared/models/film.model';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'dashq-film-card',
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './film-card.component.html',
   styleUrl: './film-card.component.scss',
   host: {
