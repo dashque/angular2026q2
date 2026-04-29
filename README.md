@@ -47,7 +47,7 @@ pnpm build
 ```
 
 ### 4) Run tests
-
+![Coverage](./badges/coverage-jest coverage.svg)
 ![Coverage Branches](./badges/coverage-branches.svg)
 ![Coverage Functions](./badges/coverage-functions.svg)
 ![Coverage Lines](./badges/coverage-lines.svg)
