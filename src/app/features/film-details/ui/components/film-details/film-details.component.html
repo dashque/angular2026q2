@@ -1,16 +1,32 @@
-<p>film-details works!</p>
-
-@let filmInfo = film();
-<div class="flex flex-col items-center">
-  <img [alt]="filmInfo.title" [ngSrc]="filmInfo.posterUrl" width="300" height="200" />
-  <div class="flex justify-around">
-    <p>{{ filmInfo.title }}</p>
-    <p>{{ filmInfo.year }}</p>
+@if (film(); as filmInfo) {
+  <div class="flex flex-col items-center">
+    <img [alt]="filmInfo.title" [ngSrc]="filmInfo.posterUrl" width="300" height="200" />
+    <div class="flex justify-around">
+      <p>{{ filmInfo.title }}</p>
+      <p>{{ filmInfo.year }}</p>
+    </div>
   </div>
-</div>
-<div class="flex justify-around">
-  <p>{{ filmInfo.genre }}</p>
-  <p>{{ filmInfo.rating }}</p>
-  <p>{{ filmInfo.isFavorite }}</p>
-</div>
-<div class="w-full"><button type="button">Add to favorites</button></div>
+  <div class="flex justify-around">
+    <p>{{ filmInfo.genre }}</p>
+    <p>{{ filmInfo.rating }}</p>
+    <p>{{ filmInfo.description }}</p>
+    <p>{{ filmInfo.duration | duration }}</p>
+    <p>{{ filmInfo.isFavorite ? 'Fav' : 'Shit' }}</p>
+  </div>
+  <div class="w-full">
+    <button
+      class="w-full text-center border-2 border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-focus-ring"
+      type="button"
+      (click)="onAddFavouriteClick(filmInfo.id)"
+    >
+      Add to favorites
+    </button>
+    <button
+      [routerLink]="['/']"
+      class="w-full text-center border-2 border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-focus-ring"
+      type="button"
+    >
+      Back
+    </button>
+  </div>
+}

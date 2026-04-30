@@ -47,6 +47,7 @@ export class FilmRepositoryService {
   }
 
   public getFilmDetails(id: number) {
-    return this._filmListResourceRef.value().find((film) => film.id === id);
+    // TODO переписать на ресурс
+    return this.httpClient.get<Film>(`${this.url}/${id}`);
   }
 }

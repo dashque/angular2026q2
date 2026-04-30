@@ -1,23 +1,29 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import type { Film } from '../../../../../shared/models/film.model';
 import { NgOptimizedImage } from '@angular/common';
+import { DurationPipe } from '../../../../../shared/pipes/duration/duration.pipe';
+import { RouterLink } from '@angular/router';
+import { FilmRepositoryService } from '../../../../../shared/services/film-repository/services/film-repository.service';
 
 @Component({
   selector: 'dashq-film-details',
-  imports: [NgOptimizedImage],
+  imports: [NgOptimizedImage, DurationPipe, RouterLink],
   templateUrl: './film-details.component.html',
   styleUrl: './film-details.component.scss',
 })
 export class FilmDetailsComponent {
   //Film Details Page
-  // The user clicked on a film card and is now on the details page.
   //
-  // Full film information is displayed: poster, title, year, genre, rating, duration (via a custom pipe), description.
-  // The film id is taken from the URL.
   // There is a "Back" button to return to the film list.
   // Breadcrumbs: Home > Film Title
   //
   // ("Home" is a clickable link, "Film Title" is the current page and is not clickable.)
 
+  public readonly fallbackPosterUrl = 'https://placehold.co/300x300?text=No+Poster';
   public readonly film = input.required<Film>();
+  private readonly filmRepository = inject(FilmRepositoryService);
+
+  public onAddFavouriteClick(id: number) {
+    this.filmRepository.toggleFavorite(id);
+  }
 }

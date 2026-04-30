@@ -14,11 +14,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class CatalogComponent {
   //Home Page (Catalog)
-  // If no films match the query — a "Nothing found" message is displayed.
   // Each card has an "Add to favorites" button. Clicking it toggles the film's favorite status.
   // Clicking on a card (not the favorite button) navigates the user to that film's details page.
   // Breadcrumbs: Home
   private filmRepositoryService = inject(FilmRepositoryService);
+  public readonly isLoading = this.filmRepositoryService.isLoading;
+  public readonly isError = this.filmRepositoryService.error;
   private router = inject(Router);
   public readonly filmList = this.filmRepositoryService.filmList;
   public readonly searchField = inject(SearchFormService).searchForm.controls.searchField;
