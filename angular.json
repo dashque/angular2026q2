@@ -87,8 +87,6 @@
         "test": {
           "builder": "@angular/build:unit-test",
           "options": {
-            "coverageReporters": ["json-summary", "lcov"],
-            "setupFiles": ["<rootDir>/setup-jest.ts"],
             "stylePreprocessorOptions": {
               "includePaths": ["src", "src/styles"]
             }
