@@ -5,14 +5,16 @@ import { Pipe } from '@angular/core';
   name: 'duration',
 })
 export class DurationPipe implements PipeTransform {
-  //Custom Pipe
-  // Create a pipe that converts a number of minutes into a human-readable duration format:
-  //
-  // Hours only: 60 → "1h"
-  // Minutes only: 45 → "45min"
-  // Hours and minutes: 90 → "1h 30min"
-  // The pipe must be standalone and used in the template of at least one component.
-  transform(value: unknown, ...args: unknown[]) {
-    console.log(value, args);
+  transform(minutes: number) {
+    if (!Number.isFinite(minutes) || minutes <= 0) {
+      return '';
+    }
+
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+
+    return [hours > 0 ? `${hours}h` : '', remainingMinutes > 0 ? `${remainingMinutes}min` : '']
+      .filter(Boolean)
+      .join(' ');
   }
 }
