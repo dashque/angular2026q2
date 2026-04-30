@@ -2,11 +2,13 @@ import { Component, inject } from '@angular/core';
 import { FilmRepositoryService } from '../../../../../shared/services/film-repository/services/film-repository.service';
 import { FilmCardComponent } from './film-card/film-card.component';
 import { Router } from '@angular/router';
-import { AutofocusDirective } from './directives/autofocus/autofocus.directive';
+import { AutofocusDirective } from '../../directives/autofocus/autofocus.directive';
+import { SearchFormService } from '../../../../../shared/services/search-form/search-form.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'dashq-catalog',
-  imports: [FilmCardComponent, AutofocusDirective],
+  imports: [FilmCardComponent, AutofocusDirective, ReactiveFormsModule],
   templateUrl: './catalog.component.html',
   styleUrl: './catalog.component.scss',
 })
@@ -31,6 +33,7 @@ export class CatalogComponent {
   private filmRepositoryService = inject(FilmRepositoryService);
   private router = inject(Router);
   public readonly filmList = this.filmRepositoryService.filmList;
+  public readonly searchForm = inject(SearchFormService).searchForm;
 
   public onCardClick(filmId: number) {
     void this.router.navigate(['details', filmId]);

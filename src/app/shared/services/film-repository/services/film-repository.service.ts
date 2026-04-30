@@ -3,6 +3,7 @@ import { computed, inject, Injectable } from '@angular/core';
 import type { Film } from '../../../models/film.model';
 import { HttpClient, httpResource } from '@angular/common/http';
 import { FILMS_URL_TOKEN } from '../constants/films-url.token';
+import { SearchFormService } from '../../search-form/search-form.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,13 +11,24 @@ import { FILMS_URL_TOKEN } from '../constants/films-url.token';
 export class FilmRepositoryService {
   private readonly httpClient = inject(HttpClient);
   private readonly url = inject(FILMS_URL_TOKEN);
+  private readonly searchForm = inject(SearchFormService);
   private readonly _filmListResourceRef = httpResource<Film[]>(() => this.url, { defaultValue: [] });
   public readonly favoriteFilmsList = computed(() => {
     return this._filmListResourceRef.value().filter((film: Film) => {
       return film.isFavorite;
     });
   });
-  public readonly filmList = computed(() => this._filmListResourceRef.value());
+  public readonly filmList = computed(() => {
+    const filter = this.searchForm.searchFieldValueChanges().trim().toLowerCase();
+
+    if (!filter) {
+      return this._filmListResourceRef.value();
+    }
+
+    return this._filmListResourceRef.value().filter((film: Film) => {
+      return film.title.toLowerCase().includes(filter);
+    });
+  });
   public readonly isLoading = this._filmListResourceRef.isLoading;
   public readonly error = this._filmListResourceRef.error;
 
