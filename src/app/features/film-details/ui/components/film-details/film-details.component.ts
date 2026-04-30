@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import type { Film } from '../../../../../shared/models/film.model';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'dashq-film-details',
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './film-details.component.html',
   styleUrl: './film-details.component.scss',
 })
@@ -16,4 +18,6 @@ export class FilmDetailsComponent {
   // Breadcrumbs: Home > Film Title
   //
   // ("Home" is a clickable link, "Film Title" is the current page and is not clickable.)
+
+  public readonly film = input.required<Film>();
 }

@@ -1,6 +1,6 @@
 import { computed, inject, Injectable } from '@angular/core';
 
-import type { Film } from '../../models/film.model';
+import type { Film } from '../../../models/film.model';
 import { HttpClient, httpResource } from '@angular/common/http';
 import { FILMS_URL_TOKEN } from '../constants/films-url.token';
 

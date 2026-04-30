@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FilmRepositoryService } from '../../../../../shared/services/film-repository/film-repository.service';
+import { FilmRepositoryService } from '../../../../../shared/services/film-repository/services/film-repository.service';
 import { FilmCardComponent } from './film-card/film-card.component';
 import { Router } from '@angular/router';
 

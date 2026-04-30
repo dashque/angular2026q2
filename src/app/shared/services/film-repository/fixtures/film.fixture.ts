@@ -1,4 +1,4 @@
-import type { Film } from '../../models/film.model';
+import type { Film } from '../../../models/film.model';
 
 export const filmFixture = {
   id: 1,
