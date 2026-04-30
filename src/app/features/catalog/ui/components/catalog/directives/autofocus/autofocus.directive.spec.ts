@@ -45,8 +45,6 @@ describe('AutofocusDirective', () => {
 
   describe.each([1])('Селектор по атрибуту', () => {
     it('должна инициализироваться на элементе с dashqAutofocus', () => {
-      const focusSpy = jest.spyOn(HTMLTextAreaElement.prototype, 'focus');
-
       fixture.detectChanges();
 
       expect(directive).toBeTruthy();
