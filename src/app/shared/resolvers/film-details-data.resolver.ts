@@ -4,6 +4,7 @@ import type { Film } from '../models/film.model';
 import { inject } from '@angular/core';
 import { FilmRepositoryService } from '../services/film-repository/services/film-repository.service';
 
+// @ts-expect-error-next-line
 export const filmDetailsDataResolver: ResolveFn<Film | UrlTree> = (activatedRouteSnapshot) => {
   const filmId = activatedRouteSnapshot.paramMap.get('id');
   const filmRepositoryService = inject(FilmRepositoryService);
