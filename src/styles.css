@@ -1,5 +1,32 @@
 @import 'tailwindcss';
 
+@theme {
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-surface: var(--bg-surface);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-border: var(--border);
+
+  --color-pink-primary: var(--pink-primary);
+  --color-pink-hover: var(--pink-hover);
+  --color-pink-soft: var(--pink-soft);
+
+  --color-green-primary: var(--green-primary);
+  --color-green-hover: var(--green-hover);
+  --color-green-soft: var(--green-soft);
+
+  --color-gray-light: var(--gray-light);
+  --color-gray-medium: var(--gray-medium);
+  --color-gray-dark: var(--gray-dark);
+
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-info: var(--info);
+  --color-focus-ring: var(--focus-ring-color);
+
+  --shadow-card: var(--shadow-card);
+}
+
 :root {
   /* Base */
   --bg-primary: #f8f9fb;
@@ -30,6 +57,7 @@
 
   /* Optional UI tokens */
   --shadow-card: 0 4px 20px rgba(31, 31, 36, 0.08);
+  --focus-ring-color: rgba(232, 93, 158, 0.3);
   --focus-ring: 0 0 0 3px rgba(232, 93, 158, 0.3);
 }
 
@@ -63,6 +91,7 @@
 
   /* Optional UI tokens */
   --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --focus-ring-color: rgba(244, 114, 182, 0.35);
   --focus-ring: 0 0 0 3px rgba(244, 114, 182, 0.35);
 }
 

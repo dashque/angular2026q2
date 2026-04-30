@@ -1,7 +1,14 @@
-<div class="flex flex-wrap gap-4 justify-center">
-  @for (film of filmList(); track film) {
-    <dashq-film-card [film]="film" (cardClicked)="onCardClick($event)" />
-  } @empty {
-    <div>Nothing found</div>
-  }
+<div class="flex gap-4 flex-col">
+  <input
+    placeholder="Search"
+    class="border-2 border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-focus-ring"
+    type="text"
+  />
+  <div class="flex flex-wrap gap-4 justify-center">
+    @for (film of filmList(); track film) {
+      <dashq-film-card [film]="film" (cardClicked)="onCardClick($event)" />
+    } @empty {
+      <div>Nothing found</div>
+    }
+  </div>
 </div>

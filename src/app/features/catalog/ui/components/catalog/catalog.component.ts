@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { FilmRepositoryService } from '../../../../../shared/services/film-repository/services/film-repository.service';
 import { FilmCardComponent } from './film-card/film-card.component';
 import { Router } from '@angular/router';
+import { AutofocusDirective } from './directives/autofocus/autofocus.directive';
 
 @Component({
   selector: 'dashq-catalog',
-  imports: [FilmCardComponent],
+  imports: [FilmCardComponent, AutofocusDirective],
   templateUrl: './catalog.component.html',
   styleUrl: './catalog.component.scss',
 })
