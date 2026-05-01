@@ -20,7 +20,7 @@
       "duration": 148,
       "description": "Cobb is a skilled thief, the best of the best in the dangerous art of extraction: he steals valuable secrets from deep within the subconscious during sleep.",
       "posterUrl": "https://upload.wikimedia.org/wikipedia/en/2/2e/Inception_%282010%29_theatrical_poster.jpg",
-      "isFavorite": true
+      "isFavorite": false
     },
     {
       "id": "3",
@@ -64,7 +64,7 @@
       "duration": 136,
       "description": "Hacker Neo discovers that the reality he lives in is merely a simulation created by machines. He must make a choice that will change the fate of humanity.",
       "posterUrl": "https://upload.wikimedia.org/wikipedia/en/d/db/The_Matrix.png",
-      "isFavorite": false
+      "isFavorite": true
     },
     {
       "id": "7",
@@ -75,7 +75,7 @@
       "duration": 139,
       "description": "An insomniac office worker and a charismatic soap salesman form an underground fight club that quickly evolves into something much greater.",
       "posterUrl": "https://upload.wikimedia.org/wikipedia/en/f/fc/Fight_Club_poster.jpg",
-      "isFavorite": false
+      "isFavorite": true
     },
     {
       "id": "8",
@@ -86,7 +86,7 @@
       "duration": 201,
       "description": "The final battle for Middle-earth begins. Frodo and Sam approach Mount Doom, while Aragorn must embrace his destiny and lead the armies of the free peoples into battle.",
       "posterUrl": "https://upload.wikimedia.org/wikipedia/en/4/48/Lord_Rings_Return_King.jpg",
-      "isFavorite": false
+      "isFavorite": true
     },
     {
       "id": "9",
