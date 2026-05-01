@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
-  public currentYear = new Date().getFullYear();
-  public author = 'https://github.com/dashque';
+  public readonly currentYear = new Date().getFullYear();
+  public readonly author = 'https://github.com/dashque';
 }

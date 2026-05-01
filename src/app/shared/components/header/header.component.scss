@@ -1,14 +1,10 @@
 @use 'tokens' as *;
 
-:host{
+:host {
   display: flex;
   justify-content: space-around;
   padding-block: 1rem;
   align-items: center;
   width: 100%;
-
-  a{
-    color: $text-secondary;
-    text-decoration: none;
-  }
+  border-bottom: 2px solid $border;
 }
