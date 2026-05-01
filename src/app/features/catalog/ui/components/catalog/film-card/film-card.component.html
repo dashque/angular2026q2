@@ -1,13 +1,14 @@
 @let filmInfo = film();
-<div class="flex flex-col items-center">
+<div class="flex flex-col items-center gap-3">
   <img [alt]="filmInfo.title" [ngSrc]="filmInfo.posterUrl" width="200" height="100" />
-  <div class="flex justify-around gap-2">
+  <div class="flex justify-center items-center gap-2 text-lg font-semibold">
     <p>{{ filmInfo.title }}</p>
-    <p>{{ filmInfo.year }}</p>
+    <p class="text-text-secondary">{{ filmInfo.year }}</p>
   </div>
 </div>
-<div class="flex justify-around gap-2">
+<div class="flex justify-center items-center gap-3 text-text-secondary">
   <p>{{ filmInfo.genre }}</p>
+  <span>•</span>
   <p>{{ filmInfo.rating }}</p>
   <button [dashqFavorite]="filmInfo" type="button">
     <span class="sr-only">Favorite</span>

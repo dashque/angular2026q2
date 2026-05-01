@@ -5,7 +5,7 @@ import { DurationPipe } from '../../../../../shared/pipes/duration/duration.pipe
 import { RouterLink } from '@angular/router';
 import { FilmRepositoryService } from '../../../../../shared/services/film-repository/services/film-repository.service';
 import { LoaderDirective } from '../../../../../shared/directives/loader/loader.directive';
-import { FavoriteDirective } from '../../../../../shared/directives/favorite.directive';
+import { FavoriteDirective } from '../../../../../shared/directives/favorite/favorite.directive';
 
 @Component({
   selector: 'dashq-film-details',

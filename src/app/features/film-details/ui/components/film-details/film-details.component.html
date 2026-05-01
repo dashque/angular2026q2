@@ -1,29 +1,31 @@
 <div [dashqLoader]="isLoading()">
-  @if (film(); as filmInfo) {
-    <div class="flex items-center">
-      <img [alt]="filmInfo.title" [ngSrc]="filmInfo.posterUrl" width="300" height="200" />
-      <div class="flex justify-around">
-        <p>{{ filmInfo.title }}</p>
-        <p>{{ filmInfo.year }}</p>
+  <div class="flex flex-col px-10 gap-6">
+    @if (film(); as filmInfo) {
+      <div class="flex items-center gap-6">
+        <img [alt]="filmInfo.title" [ngSrc]="filmInfo.posterUrl" width="300" height="200" />
+        <div class="flex flex-col gap-2">
+          <div class="text-3xl font-semibold">{{ filmInfo.title }}</div>
+          <div class="text-text-secondary">{{ filmInfo.year }}</div>
+          <div class="text-text-secondary">{{ filmInfo.genre }}</div>
+          <div class="text-text-secondary">{{ filmInfo.rating }}</div>
+          <div class="text-text-secondary">{{ filmInfo.duration | duration }}</div>
+        </div>
       </div>
-    </div>
-    <div class="flex justify-around gap-1">
-      <div>{{ filmInfo.genre }}</div>
-      <div>{{ filmInfo.rating }}</div>
-      <div>{{ filmInfo.description }}</div>
-      <div>{{ filmInfo.duration | duration }}</div>
-      <button [dashqFavorite]="filmInfo" type="button">
-        <span class="sr-only">Favorite</span>
-      </button>
-    </div>
-    <div class="w-full">
-      <button
-        [routerLink]="['/']"
-        class="w-full text-center border-2 border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-focus-ring"
-        type="button"
-      >
-        Back
-      </button>
-    </div>
-  }
+      <div class="flex items-center justify-between gap-4 rounded-md border border-border px-4 py-3 bg-bg-surface">
+        <div class="text-center flex-1">{{ filmInfo.description }}</div>
+        <button [dashqFavorite]="filmInfo" type="button">
+          <span class="sr-only">Favorite</span>
+        </button>
+      </div>
+      <div class="w-full flex justify-center">
+        <button
+          [routerLink]="['/']"
+          class="max-w-34 w-full text-center border-2 border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-focus-ring"
+          type="button"
+        >
+          Back
+        </button>
+      </div>
+    }
+  </div>
 </div>

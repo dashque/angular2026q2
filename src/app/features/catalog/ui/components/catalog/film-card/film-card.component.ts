@@ -1,7 +1,7 @@
 import { Component, input, output } from '@angular/core';
 import type { Film } from '../../../../../../shared/models/film.model';
 import { NgOptimizedImage } from '@angular/common';
-import { FavoriteDirective } from '../../../../../../shared/directives/favorite.directive';
+import { FavoriteDirective } from '../../../../../../shared/directives/favorite/favorite.directive';
 
 @Component({
   selector: 'dashq-film-card',
