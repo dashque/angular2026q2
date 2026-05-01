@@ -8,15 +8,11 @@ import { NgOptimizedImage } from '@angular/common';
   templateUrl: './film-card.component.html',
   styleUrl: './film-card.component.scss',
   host: {
-    '(click)': 'onCardClick()',
+    '(click)': 'cardClicked.emit(this.film().id)',
   },
 })
 export class FilmCardComponent {
   public readonly film = input.required<Film>();
   public readonly cardClicked = output<number>();
-
-  public onCardClick() {
-    console.log('clicked onCardClick');
-    this.cardClicked.emit(this.film().id);
-  }
+  public readonly addFavoriteButtonClicked = output<number>();
 }
