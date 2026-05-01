@@ -27,8 +27,4 @@ export class CatalogComponent {
   public onCardClick(filmId: number) {
     void this.router.navigate(['details', filmId]);
   }
-
-  public onAddFavouriteClick(id: number) {
-    this.filmRepositoryService.toggleFavorite(id);
-  }
 }

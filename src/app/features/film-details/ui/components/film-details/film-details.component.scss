@@ -1,0 +1,14 @@
+@use 'tokens' as *;
+
+button[data-favorite-icon] {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+button[data-favorite-icon]::before {
+  content: attr(data-favorite-icon);
+}
+
+button.favorite {
+  color: $error;
+}

@@ -1,27 +1,22 @@
 <div [dashqLoader]="isLoading()">
   @if (film(); as filmInfo) {
-    <div class="flex flex-col items-center">
+    <div class="flex items-center">
       <img [alt]="filmInfo.title" [ngSrc]="filmInfo.posterUrl" width="300" height="200" />
       <div class="flex justify-around">
         <p>{{ filmInfo.title }}</p>
         <p>{{ filmInfo.year }}</p>
       </div>
     </div>
-    <div class="flex justify-around">
-      <p>{{ filmInfo.genre }}</p>
-      <p>{{ filmInfo.rating }}</p>
-      <p>{{ filmInfo.description }}</p>
-      <p>{{ filmInfo.duration | duration }}</p>
-      <p>{{ filmInfo.isFavorite ? 'Fav' : 'Shit' }}</p>
+    <div class="flex justify-around gap-1">
+      <div>{{ filmInfo.genre }}</div>
+      <div>{{ filmInfo.rating }}</div>
+      <div>{{ filmInfo.description }}</div>
+      <div>{{ filmInfo.duration | duration }}</div>
+      <button [dashqFavorite]="filmInfo" type="button">
+        <span class="sr-only">Favorite</span>
+      </button>
     </div>
     <div class="w-full">
-      <button
-        class="w-full text-center border-2 border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-focus-ring"
-        type="button"
-        (click)="onAddFavouriteClick(filmInfo.id)"
-      >
-        Add to favorites
-      </button>
       <button
         [routerLink]="['/']"
         class="w-full text-center border-2 border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-focus-ring"
