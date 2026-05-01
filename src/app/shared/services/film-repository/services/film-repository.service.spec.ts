@@ -9,8 +9,8 @@ import { FILMS_URL } from '../constants/films-url';
 import { filmListFixture } from '../fixtures/film-list.fixture';
 import { favoriteFilmFixture } from '../fixtures/favorite-film.fixture';
 import { filmFixture } from '../fixtures/film.fixture';
-import { SearchFormService } from '../../search-form/search-form.service';
-import { searchFormServiceMock } from '../../search-form/search-form.service.mock';
+import { SearchFormService } from '../../search-form/services/search-form.service';
+import { searchFormServiceMock } from '../../search-form/services/search-form.service.mock';
 
 describe('FilmRepositoryService', () => {
   let service: FilmRepositoryService;
@@ -53,7 +53,7 @@ describe('FilmRepositoryService', () => {
 
   describe('Получение избранных фильмов', () => {
     it('должен вернуть только избранные фильмы', () => {
-      expect(service.favoriteFilmsList()).toEqual([favoriteFilmFixture]);
+      expect(service.favoriteFilmList()).toEqual([favoriteFilmFixture]);
     });
   });
 
