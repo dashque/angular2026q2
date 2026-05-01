@@ -1,8 +1,8 @@
 @let filmInfo = film();
 <div class="flex flex-col items-center gap-3">
   <img [alt]="filmInfo.title" [ngSrc]="filmInfo.posterUrl" width="200" height="100" />
-  <div class="flex justify-center items-center gap-2 text-lg font-semibold">
-    <p>{{ filmInfo.title }}</p>
+  <div class="flex w-full justify-center items-center gap-2 text-lg font-semibold">
+    <p class="w-full truncate">{{ filmInfo.title }}</p>
     <p class="text-text-secondary">{{ filmInfo.year }}</p>
   </div>
 </div>
