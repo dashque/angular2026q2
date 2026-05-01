@@ -10,7 +10,15 @@ describe('SearchFormService', () => {
     service = TestBed.inject(SearchFormService);
   });
 
-  it('should be created', () => {
+  it('должен инициализироваться', () => {
     expect(service).toBeTruthy();
+  });
+
+  describe('Получение инстанса формы', () => {
+    it('должен вернуть инстанс формы', () => {
+      const form = service.searchForm;
+
+      expect(form).toBe(service['_form']);
+    });
   });
 });
