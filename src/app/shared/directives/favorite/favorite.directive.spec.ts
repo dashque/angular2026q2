@@ -5,6 +5,7 @@ import { By } from '@angular/platform-browser';
 import { FavoriteDirective } from './favorite.directive';
 import { FilmRepositoryService } from '../../services/film-repository/services/film-repository.service';
 import { filmFixture } from '../../services/film-repository/fixtures/film.fixture';
+import { filmRepositoryServiceMock } from '../../services/film-repository/services/film-repository.service.mock';
 
 @Component({
   imports: [FavoriteDirective],
@@ -15,20 +16,20 @@ class TestHostComponent {
 }
 
 describe('FavoriteDirective', () => {
-  it('должен инициализироваться', () => {
-    const toggleFavoriteSpy = jest.fn();
+  let directive: FavoriteDirective;
 
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [TestHostComponent],
-      providers: [{ provide: FilmRepositoryService, useValue: { toggleFavorite: toggleFavoriteSpy } }],
+      providers: [{ provide: FilmRepositoryService, useValue: filmRepositoryServiceMock }],
     });
     const fixture = TestBed.createComponent(TestHostComponent);
 
     fixture.detectChanges();
-    const directiveInstance = fixture.debugElement
-      .query(By.directive(FavoriteDirective))
-      .injector.get(FavoriteDirective);
+    directive = fixture.debugElement.query(By.directive(FavoriteDirective)).injector.get(FavoriteDirective);
+  });
 
-    expect(directiveInstance).toBeTruthy();
+  it('должен инициализироваться', () => {
+    expect(directive).toBeTruthy();
   });
 });

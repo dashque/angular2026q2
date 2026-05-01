@@ -20,7 +20,7 @@ describe('HeaderComponent', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it('должен инициализироваться', () => {
     expect(component).toBeTruthy();
   });
 });

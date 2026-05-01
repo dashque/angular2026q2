@@ -17,7 +17,7 @@ describe('FooterComponent', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it('должен инициализироваться', () => {
     expect(component).toBeTruthy();
   });
 });

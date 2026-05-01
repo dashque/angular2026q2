@@ -1,8 +1,8 @@
 import type { SearchFormService } from './search-form.service';
+
 import { searchFormFixture } from './fixtures/search-form.fixture';
-import { signal } from '@angular/core';
 
 export const searchFormServiceMock = {
   searchForm: searchFormFixture,
-  searchFieldValueChanges: signal(''),
+  searchFieldValueChanges: jest.fn().mockReturnValue('') as any,
 } as const satisfies jest.Mocked<Partial<SearchFormService>>;

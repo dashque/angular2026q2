@@ -2,6 +2,8 @@ import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { NotFoundComponent } from './not-found.component';
+import { ActivatedRoute } from '@angular/router';
+import { activatedRouteMock } from '../../../../../shared/mocks/activated-route/activated-route.mock';
 
 describe('NotFoundComponent', () => {
   let component: NotFoundComponent;
@@ -10,6 +12,7 @@ describe('NotFoundComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [NotFoundComponent],
+      providers: [{ provide: ActivatedRoute, useValue: activatedRouteMock }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(NotFoundComponent);
@@ -17,7 +20,7 @@ describe('NotFoundComponent', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it('должен инициализироваться', () => {
     expect(component).toBeTruthy();
   });
 });
