@@ -17,6 +17,7 @@ export default tseslint.config(
         ...globals.jest,
       },
       sourceType: 'module',
+      parser: tseslint.parser,
       parserOptions: {
         projectService: true,
       },
@@ -30,7 +31,7 @@ export default tseslint.config(
     ],
     settings: {
       'better-tailwindcss': {
-        entryPoint: 'src/global.css',
+        entryPoint: 'src/styles.css',
       },
     },
     plugins: {
@@ -177,12 +178,26 @@ export default tseslint.config(
     files: ['**/*.spec.ts'],
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
     },
   },
   {
     files: ['**/*.html'],
-    extends: [...angular.configs.templateRecommended, ...angular.configs.templateAccessibility],
+    languageOptions: {
+      parser: angular.templateParser,
+    },
+    extends: [
+      ...angular.configs.templateRecommended,
+      ...angular.configs.templateAccessibility,
+      eslintPluginBetterTailwindcss.configs.recommended,
+    ],
+    settings: {
+      'better-tailwindcss': {
+        entryPoint: 'src/styles.css',
+      },
+    },
     rules: {
+      'better-tailwindcss/no-unknown-classes': 'off',
       '@angular-eslint/template/cyclomatic-complexity': ['warn', { maxComplexity: 10 }],
       '@angular-eslint/template/eqeqeq': 'error',
       '@angular-eslint/template/prefer-self-closing-tags': 'warn',
