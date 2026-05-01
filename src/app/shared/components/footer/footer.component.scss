@@ -1,0 +1,12 @@
+@use 'tokens' as *;
+
+:host{
+  width: 100%;
+  padding-block:1rem;
+  align-items: center;
+
+  a{
+    color: $text-secondary;
+    text-decoration: none;
+  }
+}
