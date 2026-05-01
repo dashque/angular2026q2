@@ -1,9 +1,11 @@
-import { Component, input } from '@angular/core';
+import { afterRenderEffect, Component, inject, input } from '@angular/core';
 import type { Film } from '../../../../../shared/models/film.model';
 import { NgOptimizedImage } from '@angular/common';
 import { DurationPipe } from '../../../../../shared/pipes/duration/duration.pipe';
 import { RouterLink } from '@angular/router';
 import { FavoriteDirective } from '../../../../../shared/directives/favorite/favorite.directive';
+import type { HttpResourceRef } from '@angular/common/http';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'dashq-film-details',
@@ -12,8 +14,12 @@ import { FavoriteDirective } from '../../../../../shared/directives/favorite/fav
   styleUrl: './film-details.component.scss',
 })
 export class FilmDetailsComponent {
-  //Film Details Page
-  // Breadcrumbs: Home > Film Title
-  // ("Home" is a clickable link, "Film Title" is the current page and is not clickable.)
-  public readonly film = input.required<Film>();
+  private titleService = inject(Title);
+  public readonly film = input.required<HttpResourceRef<Film | null>>();
+
+  constructor() {
+    afterRenderEffect(() => {
+      this.titleService.setTitle(this.film().value()?.title ?? '');
+    });
+  }
 }

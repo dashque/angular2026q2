@@ -1,12 +1,14 @@
 import type { ActivatedRouteSnapshot } from '@angular/router';
-import { type ResolveFn, UrlTree } from '@angular/router';
+import { type ResolveFn } from '@angular/router';
+import type { HttpResourceRef } from '@angular/common/http';
 import type { Film } from '../models/film.model';
 
 // TODO add tests
 export const filmDetailsBreadcrumbResolver: ResolveFn<string> = (snapshot: ActivatedRouteSnapshot) => {
-  const film = snapshot.data['film'] as Film | UrlTree | undefined;
+  const filmResourceReference = snapshot.data['film'] as HttpResourceRef<Film | null> | undefined;
+  const film = filmResourceReference?.value();
 
-  if (!film || film instanceof UrlTree) {
+  if (!film) {
     return 'Details';
   }
 

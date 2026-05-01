@@ -5,7 +5,6 @@ import type { TestRequest } from '@angular/common/http/testing';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { ApplicationRef } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
 import { FILMS_URL } from '../constants/films-url';
 import { filmListFixture } from '../fixtures/film-list.fixture';
 import { favoriteFilmFixture } from '../fixtures/favorite-film.fixture';
@@ -61,23 +60,34 @@ describe('FilmRepositoryService', () => {
   describe('Получение деталей фильма', () => {
     describe('Фильм найден', () => {
       it('должен вернуть фильм', async () => {
-        const resultPromise = firstValueFrom(service.getFilmDetails(filmFixture.id));
+        const detailsResourceReference = service.getFilmDetails(filmFixture.id);
+
+        detailsResourceReference.value();
+        TestBed.tick();
         const detailsRequestFixture = backendMock.expectOne(`${FILMS_URL}/${filmFixture.id}`);
 
         detailsRequestFixture.flush(filmFixture);
+        await TestBed.inject(ApplicationRef).whenStable();
 
-        await expect(resultPromise).resolves.toEqual(filmFixture);
+        expect(detailsResourceReference.value()).toEqual(filmFixture);
       });
     });
 
     describe('Фильм не найден', () => {
       it('должен отклонить запрос с кодом 404', async () => {
-        const resultPromise = firstValueFrom(service.getFilmDetails(999999999));
+        const detailsResourceReference = service.getFilmDetails(999_999_999);
+
+        detailsResourceReference.value();
+        TestBed.tick();
         const detailsRequestFixture = backendMock.expectOne(`${FILMS_URL}/999999999`);
 
         detailsRequestFixture.flush(null, { status: 404, statusText: 'Not Found' });
+        await TestBed.inject(ApplicationRef).whenStable();
 
-        await expect(resultPromise).rejects.toMatchObject({ status: 404 });
+        expect(() => {
+          detailsResourceReference.value();
+        }).toThrow();
+        expect(detailsResourceReference.error()).toMatchObject({ status: 404 });
       });
     });
   });

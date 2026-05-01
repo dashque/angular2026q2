@@ -1,5 +1,5 @@
 <div class="flex w-full max-w-250 flex-col px-10 gap-6">
-  @if (film(); as filmInfo) {
+  @if (film().value(); as filmInfo) {
     <div class="flex items-center gap-6">
       <img [alt]="filmInfo.title" [ngSrc]="filmInfo.posterUrl" width="300" height="200" />
       <div class="flex flex-col gap-2">

@@ -1,7 +1,7 @@
-import { computed, inject, Injectable } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 
 import type { Film } from '../../../models/film.model';
-import { HttpClient, httpResource } from '@angular/common/http';
+import { HttpClient, httpResource, type HttpResourceRef } from '@angular/common/http';
 import { FILMS_URL_TOKEN } from '../constants/films-url.token';
 import { SearchFormService } from '../../search-form/search-form.service';
 
@@ -12,7 +12,20 @@ export class FilmRepositoryService {
   private readonly httpClient = inject(HttpClient);
   private readonly url = inject(FILMS_URL_TOKEN);
   private readonly searchFormService = inject(SearchFormService);
+  private readonly _selectedFilmId = signal<number | null>(null);
   private readonly _filmListResourceRef = httpResource<Film[]>(() => this.url, { defaultValue: [] });
+  private readonly _selectedFilmResourceRef = httpResource<Film | null>(
+    () => {
+      const selectedFilmId = this._selectedFilmId();
+
+      if (selectedFilmId === null) {
+        return undefined;
+      }
+
+      return `${this.url}/${selectedFilmId}`;
+    },
+    { defaultValue: null }
+  );
   public readonly favoriteFilmsList = computed(() => {
     return this._filmListResourceRef.value().filter((film: Film) => {
       return film.isFavorite;
@@ -30,12 +43,17 @@ export class FilmRepositoryService {
     });
   });
   public readonly isLoading = this._filmListResourceRef.isLoading;
+  public readonly selectedFilm = computed(() => {
+    return this._selectedFilmResourceRef.value();
+  });
   public readonly searchForm = this.searchFormService.searchForm;
 
-  public toggleFavorite(id: number) {
-    const film = this.filmList().find((item: Film) => {
+  public toggleFavorite(id: number): void {
+    const detailsFilm = this.selectedFilm();
+    const listFilm = this.filmList().find((item: Film) => {
       return item.id === id;
     });
+    const film = detailsFilm?.id === id ? detailsFilm : listFilm;
 
     if (!film) {
       return;
@@ -43,11 +61,16 @@ export class FilmRepositoryService {
 
     this.httpClient.patch<Film>(`${this.url}/${id}`, { isFavorite: !film.isFavorite }).subscribe(() => {
       this._filmListResourceRef.reload();
+
+      if (detailsFilm?.id === id) {
+        this._selectedFilmResourceRef.reload();
+      }
     });
   }
 
-  public getFilmDetails(id: number) {
-    // TODO переписать на ресурс
-    return this.httpClient.get<Film>(`${this.url}/${id}`);
+  public getFilmDetails(id: number): HttpResourceRef<Film | null> {
+    this._selectedFilmId.set(id);
+
+    return this._selectedFilmResourceRef;
   }
 }
