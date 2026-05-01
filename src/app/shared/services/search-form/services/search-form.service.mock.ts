@@ -1,6 +1,6 @@
 import type { SearchFormService } from './search-form.service';
 
-import { searchFormFixture } from './fixtures/search-form.fixture';
+import { searchFormFixture } from '../fixtures/search-form.fixture';
 
 export const searchFormServiceMock = {
   searchForm: searchFormFixture,

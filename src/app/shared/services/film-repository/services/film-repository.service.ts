@@ -3,7 +3,7 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import type { Film } from '../../../models/film.model';
 import { HttpClient, httpResource, type HttpResourceRef } from '@angular/common/http';
 import { FILMS_URL_TOKEN } from '../constants/films-url.token';
-import { SearchFormService } from '../../search-form/search-form.service';
+import { SearchFormService } from '../../search-form/services/search-form.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,14 +19,14 @@ export class FilmRepositoryService {
       const selectedFilmId = this._selectedFilmId();
 
       if (selectedFilmId === null) {
-        return undefined;
+        return;
       }
 
       return `${this.url}/${selectedFilmId}`;
     },
     { defaultValue: null }
   );
-  public readonly favoriteFilmsList = computed(() => {
+  public readonly favoriteFilmList = computed(() => {
     return this._filmListResourceRef.value().filter((film: Film) => {
       return film.isFavorite;
     });
@@ -49,11 +49,11 @@ export class FilmRepositoryService {
   public readonly searchForm = this.searchFormService.searchForm;
 
   public toggleFavorite(id: number): void {
-    const detailsFilm = this.selectedFilm();
-    const listFilm = this.filmList().find((item: Film) => {
+    const filmDetails = this.selectedFilm();
+    const filmList = this.filmList().find((item: Film) => {
       return item.id === id;
     });
-    const film = detailsFilm?.id === id ? detailsFilm : listFilm;
+    const film = filmDetails?.id === id ? filmDetails : filmList;
 
     if (!film) {
       return;
@@ -62,7 +62,7 @@ export class FilmRepositoryService {
     this.httpClient.patch<Film>(`${this.url}/${id}`, { isFavorite: !film.isFavorite }).subscribe(() => {
       this._filmListResourceRef.reload();
 
-      if (detailsFilm?.id === id) {
+      if (filmDetails?.id === id) {
         this._selectedFilmResourceRef.reload();
       }
     });
