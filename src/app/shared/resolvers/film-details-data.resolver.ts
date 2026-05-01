@@ -5,7 +5,6 @@ import { inject } from '@angular/core';
 import { FilmRepositoryService } from '../services/film-repository/services/film-repository.service';
 import type { HttpResourceRef } from '@angular/common/http';
 
-//TODO add tests
 export const filmDetailsDataResolver: ResolveFn<HttpResourceRef<Film | null> | UrlTree> = (activatedRouteSnapshot) => {
   const filmId = activatedRouteSnapshot.paramMap.get('id');
   const filmRepositoryService = inject(FilmRepositoryService);
