@@ -1,6 +1,5 @@
 import type { Routes } from '@angular/router';
 import { LayoutComponent } from './shared/components/layout/layout.component';
-import { filmDetailsTitleResolver } from './shared/resolvers/film-details-title.resolver';
 import { filmDetailsDataResolver } from './shared/resolvers/film-details-data.resolver';
 
 export const routes: Routes = [
@@ -16,27 +15,28 @@ export const routes: Routes = [
 
           return m.CatalogComponent;
         },
-      },
-      {
-        path: 'details/:id',
-        title: filmDetailsTitleResolver,
-        resolve: {
-          film: filmDetailsDataResolver,
-        },
-        loadComponent: async () => {
-          const m = await import('./features/film-details/ui/components/film-details/film-details.component');
+        children: [
+          {
+            path: 'details/:id',
+            resolve: {
+              film: filmDetailsDataResolver,
+            },
+            loadComponent: async () => {
+              const m = await import('./features/film-details/ui/components/film-details/film-details.component');
 
-          return m.FilmDetailsComponent;
-        },
-      },
-      {
-        path: 'about',
-        title: 'About app',
-        loadComponent: async () => {
-          const m = await import('./features/about/ui/components/about/about.component');
+              return m.FilmDetailsComponent;
+            },
+          },
+          {
+            path: 'about',
+            title: 'About app',
+            loadComponent: async () => {
+              const m = await import('./features/about/ui/components/about/about.component');
 
-          return m.AboutComponent;
-        },
+              return m.AboutComponent;
+            },
+          },
+        ],
       },
       {
         path: '**',
