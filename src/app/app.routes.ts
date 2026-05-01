@@ -10,16 +10,26 @@ export const routes: Routes = [
       {
         path: '',
         title: 'Catalog',
-        loadComponent: async () => {
-          const m = await import('./features/catalog/ui/components/catalog/catalog.component');
-
-          return m.CatalogComponent;
+        data: {
+          breadcrumb: 'Catalog',
         },
         children: [
+          {
+            path: '',
+            title: 'Catalog',
+            loadComponent: async () => {
+              const m = await import('./features/catalog/ui/components/catalog/catalog.component');
+
+              return m.CatalogComponent;
+            },
+          },
           {
             path: 'details/:id',
             resolve: {
               film: filmDetailsDataResolver,
+            },
+            data: {
+              breadcrumb: '',
             },
             loadComponent: async () => {
               const m = await import('./features/film-details/ui/components/film-details/film-details.component');
@@ -30,6 +40,9 @@ export const routes: Routes = [
           {
             path: 'about',
             title: 'About app',
+            data: {
+              breadcrumb: 'About app',
+            },
             loadComponent: async () => {
               const m = await import('./features/about/ui/components/about/about.component');
 
