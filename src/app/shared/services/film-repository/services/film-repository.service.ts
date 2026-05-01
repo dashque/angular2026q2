@@ -11,7 +11,7 @@ import { SearchFormService } from '../../search-form/search-form.service';
 export class FilmRepositoryService {
   private readonly httpClient = inject(HttpClient);
   private readonly url = inject(FILMS_URL_TOKEN);
-  private readonly searchForm = inject(SearchFormService);
+  private readonly searchFormService = inject(SearchFormService);
   private readonly _filmListResourceRef = httpResource<Film[]>(() => this.url, { defaultValue: [] });
   public readonly favoriteFilmsList = computed(() => {
     return this._filmListResourceRef.value().filter((film: Film) => {
@@ -19,7 +19,7 @@ export class FilmRepositoryService {
     });
   });
   public readonly filmList = computed(() => {
-    const filter = this.searchForm.searchFieldValueChanges().trim().toLowerCase();
+    const filter = this.searchFormService.searchFieldValueChanges().trim().toLowerCase();
 
     if (!filter) {
       return this._filmListResourceRef.value();
@@ -31,6 +31,7 @@ export class FilmRepositoryService {
   });
   public readonly isLoading = this._filmListResourceRef.isLoading;
   public readonly error = this._filmListResourceRef.error;
+  public readonly searchForm = this.searchFormService.searchForm;
 
   public toggleFavorite(id: number) {
     const film = this.filmList().find((item: Film) => {
