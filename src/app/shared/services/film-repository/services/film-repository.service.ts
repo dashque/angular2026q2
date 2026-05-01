@@ -30,7 +30,6 @@ export class FilmRepositoryService {
     });
   });
   public readonly isLoading = this._filmListResourceRef.isLoading;
-  public readonly error = this._filmListResourceRef.error;
   public readonly searchForm = this.searchFormService.searchForm;
 
   public toggleFavorite(id: number) {

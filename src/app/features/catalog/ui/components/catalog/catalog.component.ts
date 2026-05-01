@@ -13,14 +13,10 @@ import { LoaderDirective } from '../../../../../shared/directives/loader/loader.
   styleUrl: './catalog.component.scss',
 })
 export class CatalogComponent {
-  //Home Page (Catalog)
-  // Each card has an "Add to favorites" button. Clicking it toggles the film's favorite status.
-  // Clicking on a card (not the favorite button) navigates the user to that film's details page.
   // Breadcrumbs: Home
   private readonly filmRepositoryService = inject(FilmRepositoryService);
   private readonly router = inject(Router);
   public readonly isLoading = this.filmRepositoryService.isLoading;
-  public readonly isError = this.filmRepositoryService.error;
   public readonly filmList = this.filmRepositoryService.filmList;
   public readonly searchControl = this.filmRepositoryService.searchForm.controls.searchField;
 

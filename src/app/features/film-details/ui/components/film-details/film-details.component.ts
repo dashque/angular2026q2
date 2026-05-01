@@ -15,12 +15,8 @@ import { FavoriteDirective } from '../../../../../shared/directives/favorite/fav
 })
 export class FilmDetailsComponent {
   //Film Details Page
-  //
-  // There is a "Back" button to return to the film list.
   // Breadcrumbs: Home > Film Title
-  //
   // ("Home" is a clickable link, "Film Title" is the current page and is not clickable.)
-
   private readonly filmRepositoryService = inject(FilmRepositoryService);
   public readonly film = input.required<Film>();
   public readonly isLoading = this.filmRepositoryService.isLoading;
