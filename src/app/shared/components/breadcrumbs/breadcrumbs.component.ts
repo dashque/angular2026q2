@@ -1,21 +1,76 @@
-import { afterNextRender, Component, inject } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, computed, inject } from '@angular/core';
+import type { ActivatedRouteSnapshot } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import type { Breadcrumb } from './models/breadcrumb.model';
 
 @Component({
   selector: 'dashq-breadcrumbs',
-  imports: [RouterLinkActive, RouterLink],
+  imports: [RouterLink],
   templateUrl: './breadcrumbs.component.html',
   styleUrl: './breadcrumbs.component.scss',
 })
 export class BreadcrumbsComponent {
-  //Breadcrumbs — show the user's current location in the application. For example: "Home", "Home > Film Title", "About".
-  // Clickable breadcrumb items serve as navigation links.
   private readonly router = inject(Router);
-  private readonly activatedRoute = inject(ActivatedRoute);
-  public readonly breadcrumbs: Breadcrumb[] = [];
+  public readonly breadcrumbs = computed(() => {
+    this.router.currentNavigation();
 
-  constructor() {
-    afterNextRender(() => {});
+    const breadcrumbList: Breadcrumb[] = [];
+    let currentRoute: ActivatedRouteSnapshot | null = this.router.routerState.snapshot.root;
+    let currentUrl = '';
+
+    while (currentRoute) {
+      const routePath = currentRoute.url
+        .map((segment) => {
+          return segment.path;
+        })
+        .join('/');
+
+      currentUrl = routePath ? `${currentUrl}/${routePath}` : currentUrl;
+
+      const label = this.resolveBreadcrumbLabel(currentRoute);
+
+      if (label) {
+        breadcrumbList.push({
+          label,
+          url: currentUrl || '/',
+        });
+      }
+
+      currentRoute = currentRoute.firstChild;
+    }
+
+    return breadcrumbList;
+  });
+
+  private resolveBreadcrumbLabel(routeSnapshot: ActivatedRouteSnapshot): string | null {
+    const routeData = routeSnapshot.routeConfig?.data as { breadcrumb?: unknown } | undefined;
+    const breadcrumbData = routeData?.breadcrumb;
+    let label: string | null = null;
+
+    if (typeof breadcrumbData === 'string') {
+      label = breadcrumbData;
+    }
+
+    if (this.isBreadcrumbFactory(breadcrumbData)) {
+      const resolvedLabel = breadcrumbData(routeSnapshot);
+
+      label = typeof resolvedLabel === 'string' ? resolvedLabel : null;
+    }
+
+    if (!label) {
+      return null;
+    }
+
+    const normalizedLabel = label.trim();
+
+    if (!normalizedLabel) {
+      return null;
+    }
+
+    return normalizedLabel;
+  }
+
+  private isBreadcrumbFactory(value: unknown): value is (snapshot: ActivatedRouteSnapshot) => unknown {
+    return typeof value === 'function';
   }
 }

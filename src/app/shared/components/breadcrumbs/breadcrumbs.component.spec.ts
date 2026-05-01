@@ -16,7 +16,7 @@ describe('BreadcrumbsComponent', () => {
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
-
+  // TODO add tests
   it('должен инициализироваться', () => {
     expect(component).toBeTruthy();
   });

@@ -1,9 +1,15 @@
-<ol class="breadcrumb">
-  @for (breadcrumb of breadcrumbs; track breadcrumb) {
-    <li>
-      <span [routerLink]="breadcrumb.url" routerLinkActive="router-link-active">
-        {{ breadcrumb.label }}
-      </span>
+@let breadcrumbList = breadcrumbs();
+<ol class="m-0 flex items-center gap-2 p-0 text-xs">
+  @for (breadcrumb of breadcrumbList; track breadcrumb.url; let isLast = $last) {
+    <li class="inline-flex list-none items-center gap-2">
+      @if (!isLast) {
+        <a class="text-pink-primary no-underline transition-colors" [routerLink]="breadcrumb.url">
+          {{ breadcrumb.label }}
+        </a>
+        <span class="text-pink-primary" aria-hidden="true">›</span>
+      } @else {
+        <span class="cursor-default text-text-secondary" aria-current="page">{{ breadcrumb.label }}</span>
+      }
     </li>
   }
 </ol>
