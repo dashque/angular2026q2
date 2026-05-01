@@ -9,7 +9,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "jest",
-    "test:cov": "jest --coverage",
+    "test:fast": "jest --maxWorkers=50% --passWithNoTests",
+    "test:changed": "jest -o --maxWorkers=50%",
+    "test:watch": "jest --watch --maxWorkers=50%",
+    "test:cov": "jest --coverage --coverageReporters=text-summary --coverageReporters=text",
     "lint": "eslint src --fix",
     "format": "prettier src -w",
     "type-check": "tsc --noEmit"
