@@ -1,7 +1,21 @@
+<a
+  class="text-sm font-medium text-text-secondary decoration-transparent underline-offset-4 transition hover:text-pink-primary hover:decoration-pink-primary"
+  routerLink="/about"
+>
+  About
+</a>
+
 <a class="text-2xl font-bold text-pink-primary hover:text-pink-hover" routerLink="/">Film Collection App</a>
-<nav aria-label="Main navigation">
-  <a class="text-info hover:text-pink-primary" routerLink="/about">About</a>
-</nav>
-<button class="text-green-primary hover:text-green-hover cursor-pointer" dashqThemeToggler type="button">
-  Theme switcher
+<button
+  class="group inline-flex cursor-pointer items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-sm font-medium text-text-primary shadow-card transition hover:border-pink-primary hover:text-pink-primary focus:outline-none focus:ring-2 focus:ring-focus-ring"
+  dashqThemeToggler
+  type="button"
+>
+  <span
+    aria-hidden="true"
+    class="inline-flex h-5 w-5 items-center justify-center rounded-full border border-border bg-bg-primary text-sm leading-none text-warning transition group-hover:border-pink-primary group-hover:text-pink-primary"
+  >
+    ◐
+  </span>
+  <span class="text-text-secondary">Theme</span>
 </button>
