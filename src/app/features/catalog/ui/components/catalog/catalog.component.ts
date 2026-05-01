@@ -13,7 +13,6 @@ import { LoaderDirective } from '../../../../../shared/directives/loader/loader.
   styleUrl: './catalog.component.scss',
 })
 export class CatalogComponent {
-  // Breadcrumbs: Home
   private readonly filmRepositoryService = inject(FilmRepositoryService);
   private readonly router = inject(Router);
   public readonly isLoading = this.filmRepositoryService.isLoading;

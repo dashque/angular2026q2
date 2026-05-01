@@ -4,6 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { CatalogComponent } from './catalog.component';
 import { Router } from '@angular/router';
 import { routerMock } from '../../../../../shared/mocks/router/router.mock';
+import { filmFixture } from '../../../../../shared/services/film-repository/fixtures/film.fixture';
 
 describe('CatalogComponent', () => {
   let component: CatalogComponent;
@@ -26,7 +27,7 @@ describe('CatalogComponent', () => {
 
   describe('Клик по карточке фильма', () => {
     it('должен редиректить на страницу деталей', () => {
-      component.onCardClick(1);
+      component.onCardClick(filmFixture.id);
 
       expect(routerMock.navigate).toHaveBeenNthCalledWith(1, ['details', 1]);
     });
