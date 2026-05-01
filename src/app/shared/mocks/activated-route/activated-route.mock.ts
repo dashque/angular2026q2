@@ -1,4 +1,4 @@
-import { type ActivatedRoute } from '@angular/router';
+import type { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { activatedRouteSnapshotMock } from './activated-route-snapshot.mock';
 
