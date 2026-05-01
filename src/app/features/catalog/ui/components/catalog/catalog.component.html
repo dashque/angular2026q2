@@ -1,3 +1,4 @@
+@let isInitialLoading = isLoading() && filmList().length === 0;
 <div class="flex w-full gap-4 flex-col">
   <form class="w-full flex justify-center py-3">
     <input
@@ -8,9 +9,9 @@
       dashqAutofocus
     />
   </form>
-  <div [dashqLoader]="isLoading()">
+  <div [dashqLoader]="isInitialLoading">
     <div class="flex flex-wrap gap-4 justify-center">
-      @for (film of filmList(); track film) {
+      @for (film of filmList(); track film.id) {
         <dashq-film-card [film]="film" (cardClicked)="onCardClick($event)" />
       } @empty {
         <div>Nothing found</div>
