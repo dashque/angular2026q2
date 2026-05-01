@@ -5,6 +5,7 @@ import globals from 'globals';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import stylistic from '@stylistic/eslint-plugin';
 import importPlugin from 'eslint-plugin-import';
+import eslintPluginBetterTailwindcss from 'eslint-plugin-better-tailwindcss';
 
 export default tseslint.config(
   {
@@ -25,7 +26,13 @@ export default tseslint.config(
       ...tseslint.configs.recommended,
       ...tseslint.configs.stylistic,
       ...angular.configs.tsRecommended,
+      eslintPluginBetterTailwindcss.configs.recommended,
     ],
+    settings: {
+      'better-tailwindcss': {
+        entryPoint: 'src/global.css',
+      },
+    },
     plugins: {
       unicorn: eslintPluginUnicorn,
       '@stylistic': stylistic,
