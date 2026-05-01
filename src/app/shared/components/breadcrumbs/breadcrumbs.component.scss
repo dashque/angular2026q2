@@ -1,0 +1,31 @@
+@use 'tokens' as *;
+
+.breadcrumb {
+  background: none;
+  font-size: 0.8em;
+  margin: 0;
+  a,
+  span {
+    color: $pink-primary;
+  }
+  a:hover,
+  span:hover {
+    color: $pink-soft;
+    text-decoration: none;
+  }
+  li {
+    list-style: none;
+    float: left;
+    margin: 5px;
+  }
+  li:last-child {
+    margin-right: 20px;
+  }
+  li::after {
+    content: '->';
+    color: $pink-primary;
+  }
+  li:last-child::after {
+    content: '';
+  }
+}

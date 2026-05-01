@@ -1,1 +1,9 @@
-<p>breadcrumbs works!</p>
+<ol class="breadcrumb">
+  @for (breadcrumb of breadcrumbs; track breadcrumb) {
+    <li>
+      <span [routerLink]="breadcrumb.url" routerLinkActive="router-link-active">
+        {{ breadcrumb.label }}
+      </span>
+    </li>
+  }
+</ol>
