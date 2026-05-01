@@ -32,13 +32,22 @@ The workspace uses `pnpm` as package manager:
 pnpm install
 ```
 
-### 2) Run development server
+### 2) Run application in development mode
 
 ```bash
 pnpm start
 ```
 
-Open `http://localhost:4200/`.
+This command starts both processes in parallel:
+- Angular dev server: `http://localhost:4200`
+- Mock API (`json-server`): `http://localhost:3001` (`/films`)
+
+If you need to run services separately:
+
+```bash
+pnpm run ng serve
+pnpm mock:api
+```
 
 ### 3) Build project
 
@@ -62,4 +71,21 @@ pnpm test
 pnpm type-check
 pnpm lint
 pnpm format
+```
+
+## Troubleshooting
+
+### Port `4200` or `3001` is already in use
+
+- Stop the process that uses the port, then run `pnpm start` again.
+- Or run services separately and change one of the ports manually if needed.
+
+### Films are not loaded in the catalog
+
+- Ensure mock API is running on `http://localhost:3001`.
+- Check that `http://localhost:3001/films` responds in the browser.
+- If needed, restart both processes:
+
+```bash
+pnpm start
 ```

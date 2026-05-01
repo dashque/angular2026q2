@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "concurrently \"ng serve\" \"pnpm mock:api\"",
     "mock:api": "json-server --watch mock/db.json --port 3001",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
@@ -37,6 +37,7 @@
     "@tailwindcss/postcss": "^4.1.12",
     "@types/jest": "^30.0.0",
     "angular-eslint": "^21.3.1",
+    "concurrently": "^9.2.1",
     "eslint": "^10.2.1",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-unicorn": "^64.0.0",
