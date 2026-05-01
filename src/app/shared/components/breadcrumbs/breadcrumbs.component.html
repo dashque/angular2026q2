@@ -1,5 +1,5 @@
 @let breadcrumbList = breadcrumbs();
-<ol class="m-0 flex items-center gap-2 p-0 text-sm">
+<ol class="m-0 flex items-center gap-2 p-0 text-lg">
   @for (breadcrumb of breadcrumbList; track breadcrumb.url; let isLast = $last) {
     <li class="inline-flex list-none items-center gap-2">
       @if (!isLast) {
