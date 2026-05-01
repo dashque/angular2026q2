@@ -1,6 +1,6 @@
 import { computed, Directive, inject, input } from '@angular/core';
-import { FilmRepositoryService } from '../services/film-repository/services/film-repository.service';
-import type { Film } from '../models/film.model';
+import { FilmRepositoryService } from '../../services/film-repository/services/film-repository.service';
+import type { Film } from '../../models/film.model';
 
 @Directive({
   selector: '[dashqFavorite]',

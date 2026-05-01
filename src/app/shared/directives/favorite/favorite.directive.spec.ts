@@ -3,8 +3,8 @@ import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { FavoriteDirective } from './favorite.directive';
-import { FilmRepositoryService } from '../services/film-repository/services/film-repository.service';
-import { filmFixture } from '../services/film-repository/fixtures/film.fixture';
+import { FilmRepositoryService } from '../../services/film-repository/services/film-repository.service';
+import { filmFixture } from '../../services/film-repository/fixtures/film.fixture';
 
 @Component({
   imports: [FavoriteDirective],
