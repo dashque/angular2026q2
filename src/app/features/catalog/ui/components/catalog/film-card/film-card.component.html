@@ -1,7 +1,7 @@
 @let filmInfo = film();
 <div class="flex w-full flex-col items-center gap-3">
   <img
-    class="w-full max-w-50 aspect-2/3 rounded-lg object-cover"
+    class="w-full max-w-50 aspect-2/3 rounded-lg object-cover border border-border"
     [alt]="filmInfo.title"
     [ngSrc]="filmInfo.posterUrl"
     width="200"
@@ -13,9 +13,9 @@
   </div>
 </div>
 <div class="flex min-h-8 justify-center items-center gap-3 text-text-secondary">
-  <p>{{ filmInfo.genre }}</p>
+  <p class="rounded-full border border-info px-2 py-0.5 text-info">{{ filmInfo.genre }}</p>
   <span>•</span>
-  <p>{{ filmInfo.rating }}</p>
+  <p class="text-green-primary">{{ filmInfo.rating }}</p>
   <button [dashqFavorite]="filmInfo" type="button">
     <span class="sr-only">Favorite</span>
   </button>

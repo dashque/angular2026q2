@@ -4,7 +4,7 @@
     <input
       [formControl]="searchControl"
       placeholder="Search"
-      class="w-full rounded-sm border-2 border-border p-2 focus:outline-none focus:ring-2 focus:ring-focus-ring"
+      class="w-full rounded-sm border-2 border-border p-2 focus:outline-none focus:ring-2 focus:ring-focus-ring placeholder:text-text-secondary"
       type="text"
     />
   </form>
@@ -13,7 +13,7 @@
       @for (film of filmList(); track film.id) {
         <dashq-film-card [film]="film" (cardClicked)="onCardClick($event)" />
       } @empty {
-        <div>Nothing found</div>
+        <div class="rounded-md border border-warning px-4 py-2 text-warning">Nothing found</div>
       }
     </div>
   </div>
