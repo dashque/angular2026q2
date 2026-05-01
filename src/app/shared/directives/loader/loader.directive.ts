@@ -13,14 +13,27 @@ export class LoaderDirective {
   });
 
   constructor() {
+    this.createLoader();
+
     effect(() => {
-      this.createLoader();
-      if (this.isLoading() && this.elementRef) {
-        this.renderer2.setStyle(this.elementRef.nativeElement.firstChild, 'display', 'none');
-        this.renderer2.appendChild(this.elementRef.nativeElement, this.loaderOverlay);
+      const contentElement = this.elementRef.nativeElement.firstElementChild;
+
+      if (this.isLoading()) {
+        if (contentElement) {
+          this.renderer2.setStyle(contentElement, 'visibility', 'hidden');
+        }
+
+        if (!this.elementRef.nativeElement.contains(this.loaderOverlay)) {
+          this.renderer2.appendChild(this.elementRef.nativeElement, this.loaderOverlay);
+        }
       } else {
-        this.renderer2.removeChild(this.elementRef.nativeElement, this.loaderOverlay);
-        this.renderer2.setStyle(this.elementRef?.nativeElement, 'display', 'block');
+        if (this.elementRef.nativeElement.contains(this.loaderOverlay)) {
+          this.renderer2.removeChild(this.elementRef.nativeElement, this.loaderOverlay);
+        }
+
+        if (contentElement) {
+          this.renderer2.setStyle(contentElement, 'visibility', 'visible');
+        }
       }
     });
   }
