@@ -5,10 +5,13 @@ import type { TestRequest } from '@angular/common/http/testing';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { ApplicationRef } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { FILMS_URL } from '../constants/films-url';
 import { filmListFixture } from '../fixtures/film-list.fixture';
 import { favoriteFilmFixture } from '../fixtures/favorite-film.fixture';
 import { filmFixture } from '../fixtures/film.fixture';
+import { SearchFormService } from '../../search-form/search-form.service';
+import { searchFormServiceMock } from '../../search-form/search-form.service.mock';
 
 describe('FilmRepositoryService', () => {
   let service: FilmRepositoryService;
@@ -17,7 +20,11 @@ describe('FilmRepositoryService', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      providers: [provideHttpClient(), provideHttpClientTesting()],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        { provide: SearchFormService, useValue: searchFormServiceMock },
+      ],
     });
     service = TestBed.inject(FilmRepositoryService);
     backendMock = TestBed.inject(HttpTestingController);
@@ -53,18 +60,24 @@ describe('FilmRepositoryService', () => {
 
   describe('Получение деталей фильма', () => {
     describe('Фильм найден', () => {
-      it('должен вернуть фильм', () => {
-        const resultFixture = service.getFilmDetails(filmFixture.id);
+      it('должен вернуть фильм', async () => {
+        const resultPromise = firstValueFrom(service.getFilmDetails(filmFixture.id));
+        const detailsRequestFixture = backendMock.expectOne(`${FILMS_URL}/${filmFixture.id}`);
 
-        expect(resultFixture).toEqual(filmFixture);
+        detailsRequestFixture.flush(filmFixture);
+
+        await expect(resultPromise).resolves.toEqual(filmFixture);
       });
     });
 
     describe('Фильм не найден', () => {
-      it('должен вернуть undefined', () => {
-        const resultFixture = service.getFilmDetails(999999999);
+      it('должен отклонить запрос с кодом 404', async () => {
+        const resultPromise = firstValueFrom(service.getFilmDetails(999999999));
+        const detailsRequestFixture = backendMock.expectOne(`${FILMS_URL}/999999999`);
 
-        expect(resultFixture).toBeUndefined();
+        detailsRequestFixture.flush(null, { status: 404, statusText: 'Not Found' });
+
+        await expect(resultPromise).rejects.toMatchObject({ status: 404 });
       });
     });
   });
