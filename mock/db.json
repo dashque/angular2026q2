@@ -9,7 +9,7 @@
       "duration": 169,
       "description": "When drought, dust storms, and the extinction of crops lead humanity to a food crisis, a team of explorers and scientists travels through a wormhole in search of a new home for mankind.",
       "posterUrl": "https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg",
-      "isFavorite": false
+      "isFavorite": true
     },
     {
       "id": "2",
@@ -20,7 +20,7 @@
       "duration": 148,
       "description": "Cobb is a skilled thief, the best of the best in the dangerous art of extraction: he steals valuable secrets from deep within the subconscious during sleep.",
       "posterUrl": "https://upload.wikimedia.org/wikipedia/en/2/2e/Inception_%282010%29_theatrical_poster.jpg",
-      "isFavorite": true
+      "isFavorite": false
     },
     {
       "id": "3",
@@ -64,7 +64,7 @@
       "duration": 136,
       "description": "Hacker Neo discovers that the reality he lives in is merely a simulation created by machines. He must make a choice that will change the fate of humanity.",
       "posterUrl": "https://upload.wikimedia.org/wikipedia/en/d/db/The_Matrix.png",
-      "isFavorite": false
+      "isFavorite": true
     },
     {
       "id": "7",

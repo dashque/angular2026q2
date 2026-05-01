@@ -111,3 +111,7 @@ body {
 .loader-spinner {
   @apply border-border border-r-pink-primary h-7 w-7 animate-spin rounded-full border-3;
 }
+
+a {
+  @apply no-underline hover:underline hover:text-pink-primary;
+}

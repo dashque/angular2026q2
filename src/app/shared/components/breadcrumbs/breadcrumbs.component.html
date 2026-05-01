@@ -3,7 +3,7 @@
   @for (breadcrumb of breadcrumbList; track breadcrumb.url; let isLast = $last) {
     <li class="inline-flex list-none items-center gap-2">
       @if (!isLast) {
-        <a class="text-pink-primary no-underline transition-colors" [routerLink]="breadcrumb.url">
+        <a class="text-pink-primary transition-colors" [routerLink]="breadcrumb.url">
           {{ breadcrumb.label }}
         </a>
         <span class="text-pink-primary" aria-hidden="true">›</span>
