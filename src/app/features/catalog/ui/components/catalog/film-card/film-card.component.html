@@ -1,18 +1,22 @@
 @let filmInfo = film();
 <div class="flex w-full flex-col items-center gap-3">
   <img
-    class="w-full max-w-50 aspect-2/3 rounded-lg object-cover border border-border"
+    class="
+      aspect-2/3 w-full max-w-50 rounded-lg border border-border object-cover
+    "
     [alt]="filmInfo.title"
     [ngSrc]="filmInfo.posterUrl"
     width="200"
     height="300"
   />
-  <div class="flex w-full justify-center items-center gap-2 text-lg font-semibold">
+  <div class="
+    flex w-full items-center justify-center gap-2 text-lg font-semibold
+  ">
     <p class="w-full truncate">{{ filmInfo.title }}</p>
     <p class="text-text-secondary">{{ filmInfo.year }}</p>
   </div>
 </div>
-<div class="flex min-h-8 justify-center items-center gap-3 text-text-secondary">
+<div class="flex min-h-8 items-center justify-center gap-3 text-text-secondary">
   <p class="rounded-full border border-info px-2 py-0.5 text-info">{{ filmInfo.genre }}</p>
   <span>•</span>
   <p class="text-green-primary">{{ filmInfo.rating }}</p>
