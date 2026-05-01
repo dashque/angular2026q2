@@ -4,10 +4,11 @@ import { NgOptimizedImage } from '@angular/common';
 import { DurationPipe } from '../../../../../shared/pipes/duration/duration.pipe';
 import { RouterLink } from '@angular/router';
 import { FilmRepositoryService } from '../../../../../shared/services/film-repository/services/film-repository.service';
+import { LoaderDirective } from '../../../../../shared/directives/loader/loader.directive';
 
 @Component({
   selector: 'dashq-film-details',
-  imports: [NgOptimizedImage, DurationPipe, RouterLink],
+  imports: [NgOptimizedImage, DurationPipe, RouterLink, LoaderDirective],
   templateUrl: './film-details.component.html',
   styleUrl: './film-details.component.scss',
 })
@@ -19,11 +20,11 @@ export class FilmDetailsComponent {
   //
   // ("Home" is a clickable link, "Film Title" is the current page and is not clickable.)
 
-  public readonly fallbackPosterUrl = 'https://placehold.co/300x300?text=No+Poster';
+  private readonly filmRepositoryService = inject(FilmRepositoryService);
   public readonly film = input.required<Film>();
-  private readonly filmRepository = inject(FilmRepositoryService);
+  public readonly isLoading = this.filmRepositoryService.isLoading;
 
   public onAddFavouriteClick(id: number) {
-    this.filmRepository.toggleFavorite(id);
+    this.filmRepositoryService.toggleFavorite(id);
   }
 }
