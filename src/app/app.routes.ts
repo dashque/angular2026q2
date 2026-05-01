@@ -1,6 +1,7 @@
-import type { Routes } from '@angular/router';
+import { type Routes } from '@angular/router';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 import { filmDetailsDataResolver } from './shared/resolvers/film-details-data.resolver';
+import { filmDetailsBreadcrumbResolver } from './shared/resolvers/film-details-breadcrumb.resolver';
 
 export const routes: Routes = [
   {
@@ -29,7 +30,7 @@ export const routes: Routes = [
               film: filmDetailsDataResolver,
             },
             data: {
-              breadcrumb: '',
+              breadcrumb: filmDetailsBreadcrumbResolver,
             },
             loadComponent: async () => {
               const m = await import('./features/film-details/ui/components/film-details/film-details.component');
