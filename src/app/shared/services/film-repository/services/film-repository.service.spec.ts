@@ -9,8 +9,6 @@ import { FILMS_URL } from '../constants/films-url';
 import { filmListFixture } from '../fixtures/film-list.fixture';
 import { favoriteFilmFixture } from '../fixtures/favorite-film.fixture';
 import { filmFixture } from '../fixtures/film.fixture';
-import { SearchFormService } from '../../search-form/services/search-form.service';
-import { searchFormServiceMock } from '../../search-form/services/search-form.service.mock';
 
 describe('FilmRepositoryService', () => {
   let service: FilmRepositoryService;
@@ -19,11 +17,7 @@ describe('FilmRepositoryService', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      providers: [
-        provideHttpClient(),
-        provideHttpClientTesting(),
-        { provide: SearchFormService, useValue: searchFormServiceMock },
-      ],
+      providers: [provideHttpClient(), provideHttpClientTesting()],
     });
     service = TestBed.inject(FilmRepositoryService);
     backendMock = TestBed.inject(HttpTestingController);
