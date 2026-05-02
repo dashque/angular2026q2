@@ -1,7 +1,7 @@
 import { computed, inject, Injectable } from '@angular/core';
-import type { Breadcrumb } from '../../components/breadcrumbs/models/breadcrumb.model';
 import type { ActivatedRouteSnapshot } from '@angular/router';
 import { Router } from '@angular/router';
+import type { Breadcrumb } from './models/breadcrumb.model';
 
 @Injectable({
   providedIn: 'root',
@@ -43,7 +43,7 @@ export class BreadcrumbsService {
     return breadcrumbList;
   }
 
-  private resolveBreadcrumbLabel(routeSnapshot: ActivatedRouteSnapshot): string | null {
+  private resolveBreadcrumbLabel(routeSnapshot: ActivatedRouteSnapshot) {
     const routeData = routeSnapshot.routeConfig?.data as { breadcrumb?: unknown } | undefined;
     const breadcrumbData = routeData?.breadcrumb;
     let label: string | null = null;
