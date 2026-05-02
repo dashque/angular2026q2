@@ -6,10 +6,12 @@ import { RouterLink } from '@angular/router';
 import { FavoriteDirective } from '../../../../../shared/directives/favorite/favorite.directive';
 import type { HttpResourceRef } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
+import { LoaderDirective } from '../../../../../shared/directives/loader/loader.directive';
+import { NotFoundComponent } from '../../../../not-found/ui/components/not-found/not-found.component';
 
 @Component({
   selector: 'dashq-film-details',
-  imports: [NgOptimizedImage, DurationPipe, RouterLink, FavoriteDirective],
+  imports: [NgOptimizedImage, DurationPipe, RouterLink, FavoriteDirective, LoaderDirective, NotFoundComponent],
   templateUrl: './film-details.component.html',
   styleUrl: './film-details.component.scss',
 })
