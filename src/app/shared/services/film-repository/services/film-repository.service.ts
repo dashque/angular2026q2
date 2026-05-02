@@ -40,12 +40,21 @@ export class FilmRepositoryService {
       return;
     }
 
-    this.httpClient.patch<Film>(`${this.url}/${id}`, { isFavorite: !film.isFavorite }).subscribe(() => {
-      this.filmListResourceRef.reload();
+    this.httpClient.patch<Film>(`${this.url}/${id}`, { isFavorite: !film.isFavorite }).subscribe({
+      next: () => {
+        this.filmListResourceRef.reload();
 
-      if (filmDetails?.id === id) {
-        this._selectedFilmResourceRef.reload();
-      }
+        if (filmDetails?.id === id) {
+          this._selectedFilmResourceRef.reload();
+        }
+      },
+      error: () => {
+        this.filmListResourceRef.reload();
+
+        if (filmDetails?.id === id) {
+          this._selectedFilmResourceRef.reload();
+        }
+      },
     });
   }
 

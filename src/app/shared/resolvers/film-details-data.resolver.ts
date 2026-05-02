@@ -11,7 +11,7 @@ export const filmDetailsDataResolver: ResolveFn<HttpResourceRef<Film | null> | U
   const router = inject(Router);
   const parsedFilmId = Number(filmId);
 
-  if (!filmId || !Number.isFinite(parsedFilmId)) {
+  if (!filmId || !Number.isInteger(parsedFilmId)) {
     return router.createUrlTree(['/']);
   }
 

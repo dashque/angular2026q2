@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently \"ng serve\" \"pnpm mock:api\"",
+    "start": "concurrently \"ng serve -o\" \"pnpm mock:api\"",
     "mock:api": "json-server --watch mock/db.json --port 3001",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",

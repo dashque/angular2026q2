@@ -1,4 +1,4 @@
-import { afterRenderEffect, Component, inject, input } from '@angular/core';
+import { Component, effect, inject, input } from '@angular/core';
 import type { Film } from '../../../../../shared/models/film.model';
 import { NgOptimizedImage } from '@angular/common';
 import { DurationPipe } from '../../../../../shared/pipes/duration/duration.pipe';
@@ -20,8 +20,16 @@ export class FilmDetailsComponent {
   public readonly film = input.required<HttpResourceRef<Film | null>>();
 
   constructor() {
-    afterRenderEffect(() => {
-      this.titleService.setTitle(this.film().value()?.title ?? '');
+    effect(() => {
+      const resource = this.film();
+
+      if (resource.hasValue()) {
+        const filmInfo = resource.value();
+
+        this.titleService.setTitle(filmInfo?.title ?? '');
+
+        return;
+      }
     });
   }
 }

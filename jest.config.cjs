@@ -5,6 +5,7 @@ module.exports = {
   ...createCjsPreset(),
   clearMocks: true,
   coverageDirectory: 'coverage',
+  transformIgnorePatterns: ['node_modules/(?!(@angular|flat/|.*\\.mjs$))'],
   coverageProvider: 'v8',
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   testEnvironment: 'jsdom',

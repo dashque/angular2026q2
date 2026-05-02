@@ -18,11 +18,10 @@ export const routes: Routes = [
           {
             path: '',
             title: 'Catalog',
-            loadComponent: async () => {
-              const m = await import('./features/catalog/ui/components/catalog/catalog.component');
-
-              return m.CatalogComponent;
-            },
+            loadComponent: async () =>
+              await import('./features/catalog/ui/components/catalog/catalog.component').then(
+                (m) => m.CatalogComponent
+              ),
           },
           {
             path: 'details/:id',
@@ -32,11 +31,10 @@ export const routes: Routes = [
             data: {
               breadcrumb: filmDetailsBreadcrumbResolver,
             },
-            loadComponent: async () => {
-              const m = await import('./features/film-details/ui/components/film-details/film-details.component');
-
-              return m.FilmDetailsComponent;
-            },
+            loadComponent: async () =>
+              await import('./features/film-details/ui/components/film-details/film-details.component').then(
+                (m) => m.FilmDetailsComponent
+              ),
           },
           {
             path: 'about',
@@ -44,22 +42,18 @@ export const routes: Routes = [
             data: {
               breadcrumb: 'About app',
             },
-            loadComponent: async () => {
-              const m = await import('./features/about/ui/components/about/about.component');
-
-              return m.AboutComponent;
-            },
+            loadComponent: async () =>
+              await import('./features/about/ui/components/about/about.component').then((m) => m.AboutComponent),
           },
         ],
       },
       {
         path: '**',
         title: 'Page Not Found',
-        loadComponent: async () => {
-          const m = await import('./features/not-found/ui/components/not-found/not-found.component');
-
-          return m.NotFoundComponent;
-        },
+        loadComponent: async () =>
+          await import('./features/not-found/ui/components/not-found/not-found.component').then(
+            (m) => m.NotFoundComponent
+          ),
       },
     ],
   },
