@@ -68,7 +68,7 @@ describe('FilmRepositoryService', () => {
     });
 
     describe('Фильм не найден', () => {
-      it('должен отклонить запрос с кодом 404', async () => {
+      it('должен бросить ошибку', async () => {
         const detailsResourceReference = service.getFilmDetails(999_999_999);
 
         detailsResourceReference.value();
@@ -81,6 +81,18 @@ describe('FilmRepositoryService', () => {
         expect(() => {
           detailsResourceReference.value();
         }).toThrow();
+      });
+
+      it('должен отклонить запрос с кодом 404', async () => {
+        const detailsResourceReference = service.getFilmDetails(999_999_999);
+
+        detailsResourceReference.value();
+        TestBed.tick();
+        const detailsRequestFixture = backendMock.expectOne(`${FILMS_URL}/999999999`);
+
+        detailsRequestFixture.flush(null, { status: 404, statusText: 'Not Found' });
+        await TestBed.inject(ApplicationRef).whenStable();
+
         expect(detailsResourceReference.error()).toMatchObject({ status: 404 });
       });
     });
