@@ -12,7 +12,7 @@
     "test:fast": "jest --maxWorkers=50% --passWithNoTests",
     "test:changed": "jest -o --maxWorkers=50%",
     "test:watch": "jest --watch --maxWorkers=50%",
-    "test:cov": "jest --coverage --coverageReporters=text-summary --coverageReporters=text",
+    "test:cov": "jest --coverage --coverageReporters=text-summary --coverageReporters=text --coverageReporters=json-summary --coverageReporters=lcov",
     "lint": "eslint src --fix",
     "format": "prettier src -w",
     "type-check": "tsc -b --noEmit"

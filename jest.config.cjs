@@ -5,7 +5,6 @@ module.exports = {
   ...createCjsPreset(),
   clearMocks: true,
   coverageDirectory: 'coverage',
-  coverageReporters: ['json-summary', 'lcov'],
   coverageProvider: 'v8',
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   testEnvironment: 'jsdom',
