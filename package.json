@@ -15,7 +15,7 @@
     "test:cov": "jest --coverage --coverageReporters=text-summary --coverageReporters=text",
     "lint": "eslint src --fix",
     "format": "prettier src -w",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc -b --noEmit"
   },
   "private": true,
   "dependencies": {
