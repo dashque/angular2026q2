@@ -7,8 +7,8 @@ import { SearchFormService } from '../../services/search-form/services/search-fo
 import { searchFormServiceMock } from '../../services/search-form/services/search-form.service.mock';
 import { filmListFixture } from '../../services/film-repository/fixtures/film-list.fixture';
 import { filmFixture } from '../../services/film-repository/fixtures/film.fixture';
-import { filmListResourceReferenceMock } from '../../mocks/http-resource/film-resource-reference.mock';
 import { favoriteFilmFixture } from '../../services/film-repository/fixtures/favorite-film.fixture';
+import { resourceValueMock } from '../../mocks/http-resource/resource-value.mock';
 
 const recreateFilmListFacade = (): FilmListFacade => {
   TestBed.resetTestingModule();
@@ -29,7 +29,6 @@ describe('FilmListFacade', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     searchFormServiceMock.searchFieldValueChanges.mockReturnValue('');
-    filmListResourceReferenceMock.value.mockReturnValue([...filmListFixture]);
     service = recreateFilmListFacade();
   });
 
@@ -58,7 +57,7 @@ describe('FilmListFacade', () => {
 
       describe('Совпадения есть', () => {
         it('должен возвращать только фильмы, подходящие под поиск', () => {
-          filmListResourceReferenceMock.value.mockReturnValue([filmFixture, favoriteFilmFixture]);
+          resourceValueMock.mockReturnValue([filmFixture, favoriteFilmFixture]);
           searchFormServiceMock.searchFieldValueChanges.mockReturnValue('  INCEp ');
           const facade = recreateFilmListFacade();
 

@@ -1,6 +1,6 @@
 import type { FilmRepositoryService } from './film-repository.service';
 import { filmFixture } from '../fixtures/film.fixture';
-import { filmListResourceReferenceMock } from '../../../mocks/http-resource/film-resource-reference.mock';
+import { filmListResourceReferenceMock } from '../../../mocks/http-resource/film-list-resource-reference.mock';
 
 export const filmRepositoryServiceMock = {
   filmListResourceRef: filmListResourceReferenceMock,

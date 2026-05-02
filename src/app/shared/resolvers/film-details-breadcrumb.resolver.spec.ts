@@ -1,9 +1,11 @@
-import type { ActivatedRouteSnapshot } from '@angular/router';
+import type { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import type { HttpResourceRef } from '@angular/common/http';
 
 import type { Film } from '../models/film.model';
 import { filmFixture } from '../services/film-repository/fixtures/film.fixture';
 import { filmDetailsBreadcrumbResolver } from './film-details-breadcrumb.resolver';
+
+const routerStateSnapshotFixture = {} as RouterStateSnapshot;
 
 describe('filmDetailsBreadcrumbResolver', () => {
   it('должен вернуть Details если ресурс фильма отсутствует', () => {
@@ -11,7 +13,7 @@ describe('filmDetailsBreadcrumbResolver', () => {
       data: {},
     } as unknown as ActivatedRouteSnapshot;
 
-    const result = filmDetailsBreadcrumbResolver(snapshotFixture);
+    const result = filmDetailsBreadcrumbResolver(snapshotFixture, routerStateSnapshotFixture);
 
     expect(result).toBe('Details');
   });
@@ -29,7 +31,7 @@ describe('filmDetailsBreadcrumbResolver', () => {
       },
     } as unknown as ActivatedRouteSnapshot;
 
-    const result = filmDetailsBreadcrumbResolver(snapshotFixture);
+    const result = filmDetailsBreadcrumbResolver(snapshotFixture, routerStateSnapshotFixture);
 
     expect(result).toBe('Details');
   });
@@ -50,7 +52,7 @@ describe('filmDetailsBreadcrumbResolver', () => {
       },
     } as unknown as ActivatedRouteSnapshot;
 
-    const result = filmDetailsBreadcrumbResolver(snapshotFixture);
+    const result = filmDetailsBreadcrumbResolver(snapshotFixture, routerStateSnapshotFixture);
 
     expect(result).toBe('Details');
   });
@@ -70,7 +72,7 @@ describe('filmDetailsBreadcrumbResolver', () => {
       },
     } as unknown as ActivatedRouteSnapshot;
 
-    const result = filmDetailsBreadcrumbResolver(snapshotFixture);
+    const result = filmDetailsBreadcrumbResolver(snapshotFixture, routerStateSnapshotFixture);
 
     expect(result).toBe(filmFixture.title);
   });
