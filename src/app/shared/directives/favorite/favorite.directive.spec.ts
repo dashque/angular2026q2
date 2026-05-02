@@ -83,11 +83,11 @@ describe('FavoriteDirective', () => {
         fixture.detectChanges();
       });
 
-      it('должен добавлять класс favorite', () => {
+      it('не должен добавлять класс favorite', () => {
         expect(favoriteButton.classList.contains('favorite')).toBeFalsy();
       });
 
-      it('должен добавлять соответствующую иконку для избранного фильма', () => {
+      it('не должен добавлять соответствующую иконку для избранного фильма', () => {
         expect(favoriteButton.getAttribute('data-favorite-icon')).toBe('♡');
       });
     });

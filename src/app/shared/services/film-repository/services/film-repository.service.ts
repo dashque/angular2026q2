@@ -42,18 +42,10 @@ export class FilmRepositoryService {
 
     this.httpClient.patch<Film>(`${this.url}/${id}`, { isFavorite: !film.isFavorite }).subscribe({
       next: () => {
-        this.filmListResourceRef.reload();
-
-        if (filmDetails?.id === id) {
-          this._selectedFilmResourceRef.reload();
-        }
+        this.reloadResources(id);
       },
       error: () => {
-        this.filmListResourceRef.reload();
-
-        if (filmDetails?.id === id) {
-          this._selectedFilmResourceRef.reload();
-        }
+        this.reloadResources(id);
       },
     });
   }
@@ -62,5 +54,13 @@ export class FilmRepositoryService {
     this._selectedFilmId.set(id);
 
     return this._selectedFilmResourceRef;
+  }
+
+  private reloadResources(id: number) {
+    this.filmListResourceRef.reload();
+
+    if (this._selectedFilm()?.id === id) {
+      this._selectedFilmResourceRef.reload();
+    }
   }
 }

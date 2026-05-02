@@ -35,7 +35,7 @@ describe('LoaderDirective', () => {
   });
 
   describe('Статус загрузки true', () => {
-    describe('Найден хост элемент', () => {
+    describe('Есть дочерний контент', () => {
       it('должен сделать его невидимым', () => {
         fixture.componentInstance.isLoading = true;
         fixture.detectChanges();
@@ -66,7 +66,7 @@ describe('LoaderDirective', () => {
       });
     });
 
-    describe('Найден хост элемент', () => {
+    describe('Есть дочерний контент', () => {
       it('должен сделать его видимым', () => {
         fixture.componentInstance.isLoading = true;
         fixture.detectChanges();
