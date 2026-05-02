@@ -8,10 +8,13 @@ import { Router } from '@angular/router';
 })
 export class BreadcrumbsService {
   private readonly router = inject(Router);
-
   public readonly breadcrumbs = computed(() => {
     this.router.currentNavigation();
 
+    return this.getBreadcrumbs();
+  });
+
+  private getBreadcrumbs() {
     const breadcrumbList: Breadcrumb[] = [];
     let currentRoute: ActivatedRouteSnapshot | null = this.router.routerState.snapshot.root;
     let currentUrl = '';
@@ -38,7 +41,7 @@ export class BreadcrumbsService {
     }
 
     return breadcrumbList;
-  });
+  }
 
   private resolveBreadcrumbLabel(routeSnapshot: ActivatedRouteSnapshot): string | null {
     const routeData = routeSnapshot.routeConfig?.data as { breadcrumb?: unknown } | undefined;
