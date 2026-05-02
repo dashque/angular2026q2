@@ -11,6 +11,8 @@ import type { Film } from '../models/film.model';
 import { filmFixture } from '../services/film-repository/fixtures/film.fixture';
 
 describe('filmDetailsDataResolver', () => {
+  let result: MaybeAsync<UrlTree | HttpResourceRef<Film | null> | RedirectCommand>;
+
   const validSnapshotFixture = {
     paramMap: {
       get: jest.fn(() => {
@@ -30,15 +32,13 @@ describe('filmDetailsDataResolver', () => {
   });
 
   describe('Id валидный', () => {
-    let result: MaybeAsync<UrlTree | HttpResourceRef<Film | null> | RedirectCommand>;
-
     beforeEach(() => {
       result = TestBed.runInInjectionContext(() => {
         return filmDetailsDataResolver(validSnapshotFixture);
       });
     });
 
-    it('должен вернуть вернуть undefined', () => {
+    it('должен вернуть вернуть фильм', () => {
       expect(result).toBe(filmFixture);
     });
 
@@ -52,8 +52,6 @@ describe('filmDetailsDataResolver', () => {
   });
 
   describe('Id отсутствует', () => {
-    let result: MaybeAsync<UrlTree | HttpResourceRef<Film | null> | RedirectCommand>;
-
     beforeEach(() => {
       result = TestBed.runInInjectionContext(() => {
         return filmDetailsDataResolver(activatedRouteSnapshotMock);
@@ -74,7 +72,6 @@ describe('filmDetailsDataResolver', () => {
   });
 
   describe('Id не является числом', () => {
-    let result: MaybeAsync<UrlTree | HttpResourceRef<Film | null> | RedirectCommand>;
     const snapshotFixture = {
       paramMap: {
         get: jest.fn(() => {
@@ -103,8 +100,6 @@ describe('filmDetailsDataResolver', () => {
   });
 
   describe('Сервис вернул пустой результат', () => {
-    let result: MaybeAsync<UrlTree | HttpResourceRef<Film | null> | RedirectCommand>;
-
     beforeEach(() => {
       filmRepositoryServiceMock.getFilmDetails.mockReturnValueOnce(null);
       result = TestBed.runInInjectionContext(() => {
