@@ -1,6 +1,6 @@
 import { computed, Directive, inject, input } from '@angular/core';
-import { FilmRepositoryService } from '../../services/film-repository/services/film-repository.service';
 import type { Film } from '../../models/film.model';
+import { FilmListFacade } from '../../facades/film-list/film-list.facade';
 
 @Directive({
   selector: '[dashqFavorite]',
@@ -11,7 +11,7 @@ import type { Film } from '../../models/film.model';
   },
 })
 export class FavoriteDirective {
-  private readonly filmRepositoryService = inject(FilmRepositoryService);
+  private readonly filmListFacade = inject(FilmListFacade);
   public readonly film = input<Film | null>(null, {
     alias: 'dashqFavorite',
   });
@@ -30,6 +30,6 @@ export class FavoriteDirective {
       return;
     }
 
-    this.filmRepositoryService.toggleFavorite(film.id);
+    this.filmListFacade.toggleFavorite(film.id);
   }
 }

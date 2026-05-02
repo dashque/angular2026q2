@@ -4,11 +4,11 @@ import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { FavoriteDirective } from './favorite.directive';
-import { FilmRepositoryService } from '../../services/film-repository/services/film-repository.service';
 import { filmFixture } from '../../services/film-repository/fixtures/film.fixture';
-import { filmRepositoryServiceMock } from '../../services/film-repository/services/film-repository.service.mock';
 import { favoriteFilmFixture } from '../../services/film-repository/fixtures/favorite-film.fixture';
 import type { Film } from '../../models/film.model';
+import { FilmListFacade } from '../../facades/film-list/film-list.facade';
+import { filmListFacadeMock } from '../../facades/film-list/film-list.facade.mock';
 
 @Component({
   imports: [FavoriteDirective],
@@ -24,10 +24,10 @@ describe('FavoriteDirective', () => {
   let favoriteButton: HTMLButtonElement;
 
   beforeEach(() => {
-    filmRepositoryServiceMock.toggleFavorite.mockClear();
+    filmListFacadeMock.toggleFavorite.mockClear();
     TestBed.configureTestingModule({
       imports: [TestHostComponent],
-      providers: [{ provide: FilmRepositoryService, useValue: filmRepositoryServiceMock }],
+      providers: [{ provide: FilmListFacade, useValue: filmListFacadeMock }],
     });
     fixture = TestBed.createComponent(TestHostComponent);
     fixture.detectChanges();
@@ -45,7 +45,7 @@ describe('FavoriteDirective', () => {
 
         favoriteButton.click();
 
-        expect(filmRepositoryServiceMock.toggleFavorite).toHaveBeenNthCalledWith(1, filmFixture.id);
+        expect(filmListFacadeMock.toggleFavorite).toHaveBeenNthCalledWith(1, filmFixture.id);
       });
     });
 
@@ -56,7 +56,7 @@ describe('FavoriteDirective', () => {
 
         favoriteButton.click();
 
-        expect(filmRepositoryServiceMock.toggleFavorite).not.toHaveBeenCalled();
+        expect(filmListFacadeMock.toggleFavorite).not.toHaveBeenCalled();
       });
     });
   });
