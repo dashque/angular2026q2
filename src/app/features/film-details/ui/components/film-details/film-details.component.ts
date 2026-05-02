@@ -16,7 +16,7 @@ import { NotFoundComponent } from '../../../../not-found/ui/components/not-found
   styleUrl: './film-details.component.scss',
 })
 export class FilmDetailsComponent {
-  private titleService = inject(Title);
+  private readonly titleService = inject(Title);
   public readonly film = input.required<HttpResourceRef<Film | null>>();
 
   constructor() {

@@ -14,7 +14,6 @@ export const filmDetailsDataResolver: ResolveFn<HttpResourceRef<Film | null> | U
   if (!filmId || !Number.isFinite(parsedFilmId)) {
     return router.createUrlTree(['/']);
   }
-  const film = filmRepositoryService.getFilmDetails(parsedFilmId);
 
-  return film ? film : router.createUrlTree(['/']);
+  return filmRepositoryService.getFilmDetails(parsedFilmId);
 };

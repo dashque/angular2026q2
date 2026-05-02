@@ -1,4 +1,4 @@
-@let isInitialLoading = film().isLoading() && film().hasValue();
+@let isInitialLoading = film().isLoading() && !film().hasValue();
 <div class="mx-auto flex w-full max-w-250 flex-col gap-6 px-10" [dashqLoader]="isInitialLoading">
   @if (film().value(); as filmInfo) {
     <div class="

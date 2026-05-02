@@ -1,5 +1,11 @@
 import { TestBed } from '@angular/core/testing';
-import type { ActivatedRouteSnapshot, MaybeAsync, RedirectCommand, UrlTree } from '@angular/router';
+import type {
+  ActivatedRouteSnapshot,
+  MaybeAsync,
+  RedirectCommand,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
 import { Router } from '@angular/router';
 import { FilmRepositoryService } from '../services/film-repository/services/film-repository.service';
 import { filmDetailsDataResolver } from './film-details-data.resolver';
@@ -12,6 +18,7 @@ import { filmFixture } from '../services/film-repository/fixtures/film.fixture';
 
 describe('filmDetailsDataResolver', () => {
   let result: MaybeAsync<UrlTree | HttpResourceRef<Film | null> | RedirectCommand>;
+  const routerStateSnapshotFixture = {} as RouterStateSnapshot;
 
   const validSnapshotFixture = {
     paramMap: {
@@ -34,11 +41,11 @@ describe('filmDetailsDataResolver', () => {
   describe('Id валидный', () => {
     beforeEach(() => {
       result = TestBed.runInInjectionContext(() => {
-        return filmDetailsDataResolver(validSnapshotFixture);
+        return filmDetailsDataResolver(validSnapshotFixture, routerStateSnapshotFixture);
       });
     });
 
-    it('должен вернуть вернуть фильм', () => {
+    it('должен вернуть фильм', () => {
       expect(result).toBe(filmFixture);
     });
 
@@ -53,13 +60,9 @@ describe('filmDetailsDataResolver', () => {
 
   describe('Id отсутствует', () => {
     beforeEach(() => {
-      result = TestBed.runInInjectionContext(() => {
-        return filmDetailsDataResolver(activatedRouteSnapshotMock);
+      TestBed.runInInjectionContext(() => {
+        return filmDetailsDataResolver(activatedRouteSnapshotMock, routerStateSnapshotFixture);
       });
-    });
-
-    it('должен вернуть вернуть undefined', () => {
-      expect(result).toBeUndefined();
     });
 
     it('должен перенаправить на главную страницу', () => {
@@ -81,13 +84,9 @@ describe('filmDetailsDataResolver', () => {
     } as unknown as ActivatedRouteSnapshot;
 
     beforeEach(() => {
-      result = TestBed.runInInjectionContext(() => {
-        return filmDetailsDataResolver(snapshotFixture);
+      TestBed.runInInjectionContext(() => {
+        return filmDetailsDataResolver(snapshotFixture, routerStateSnapshotFixture);
       });
-    });
-
-    it('должен вернуть вернуть undefined', () => {
-      expect(result).toBeUndefined();
     });
 
     it('должен перенаправить на главную страницу', () => {
@@ -96,27 +95,6 @@ describe('filmDetailsDataResolver', () => {
 
     it('не должен вызывать метод репозитория', () => {
       expect(filmRepositoryServiceMock.getFilmDetails).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('Сервис вернул пустой результат', () => {
-    beforeEach(() => {
-      filmRepositoryServiceMock.getFilmDetails.mockReturnValueOnce(null);
-      result = TestBed.runInInjectionContext(() => {
-        return filmDetailsDataResolver(validSnapshotFixture);
-      });
-    });
-
-    it('должен вернуть вернуть undefined', () => {
-      expect(result).toBeUndefined();
-    });
-
-    it('должен вызывать метод репозитория', () => {
-      expect(filmRepositoryServiceMock.getFilmDetails).toHaveBeenNthCalledWith(1, 1);
-    });
-
-    it('должен перенаправить на главную страницу', () => {
-      expect(routerMock.createUrlTree).toHaveBeenNthCalledWith(1, ['/']);
     });
   });
 });
