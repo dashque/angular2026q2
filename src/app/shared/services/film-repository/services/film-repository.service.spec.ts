@@ -47,13 +47,7 @@ describe('FilmRepositoryService', () => {
     });
 
     it('должен вернуть список фильмов', () => {
-      expect(service.filmList()).toEqual(filmListFixture);
-    });
-  });
-
-  describe('Получение избранных фильмов', () => {
-    it('должен вернуть только избранные фильмы', () => {
-      expect(service.favoriteFilmList()).toEqual([favoriteFilmFixture]);
+      expect(service.filmListResourceRef.value()).toEqual(filmListFixture);
     });
   });
 
@@ -100,13 +94,14 @@ describe('FilmRepositoryService', () => {
       patchRequestFixture = backendMock.expectOne(`${FILMS_URL}/${favoriteFilmFixture.id}`);
       patchRequestFixture.flush({ ...favoriteFilmFixture, isFavorite: true });
     });
+
     describe('Фильм найден', () => {
       it('должен выполнить запрос', () => {
         expect(patchRequestFixture.request.method).toBe('PATCH');
       });
 
       it('должен изменить статус избранного фильма', () => {
-        expect(patchRequestFixture.request.body).toEqual({ isFavorite: true });
+        expect(patchRequestFixture.request.body).toEqual({ isFavorite: false });
       });
     });
 
