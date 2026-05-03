@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { describe, jest } from '@jest/globals';
 
 @Component({
   imports: [ThemeTogglerDirective],
@@ -58,11 +57,5 @@ describe('ThemeTogglerDirective', () => {
 
       expect(document.body.classList.contains('dark-theme')).toBeFalsy();
     });
-  });
-});
-
-describe('', () => {
-  it('should ', () => {
-    jest.spyOn(console, 'error').mockImplementation(() => {});
   });
 });
