@@ -1,7 +1,7 @@
 import { computed, inject, Injectable } from '@angular/core';
 import type { ActivatedRouteSnapshot } from '@angular/router';
 import { Router } from '@angular/router';
-import type { Breadcrumb } from './models/breadcrumb.model';
+import type { Breadcrumb } from '../models/breadcrumb.model';
 
 @Injectable({
   providedIn: 'root',

@@ -3,8 +3,8 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 
 import { BreadcrumbsService } from './breadcrumbs.service';
-import { routesFixture } from './fixtures/routes.fixture';
-import type { Breadcrumb } from './models/breadcrumb.model';
+import { routesFixture } from '../fixtures/routes.fixture';
+import type { Breadcrumb } from '../models/breadcrumb.model';
 
 describe('BreadcrumbsService', () => {
   let router: Router;
