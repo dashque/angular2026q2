@@ -37,7 +37,6 @@
     "@angular/compiler-cli": "^21.2.0",
     "@angular/platform-browser-dynamic": "^21.2.11",
     "@eslint/js": "^10.0.1",
-    "@jest/globals": "30.3.0",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@tailwindcss/postcss": "^4.1.12",
     "@types/jest": "^30.0.0",
