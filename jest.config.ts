@@ -1,13 +1,14 @@
-const { createCjsPreset } = require('jest-preset-angular/presets');
+/** @jest-config-loader ts-node */
+import type { Config } from 'jest';
 
-/** @type {import('ts-jest').JestConfigWithTsJest} */
-module.exports = {
-  ...createCjsPreset(),
+const config: Config = {
+  preset: 'jest-preset-angular',
   clearMocks: true,
   coverageDirectory: 'coverage',
-  transformIgnorePatterns: ['node_modules/(?!(@angular|flat/|.*\\.mjs$))'],
   coverageProvider: 'v8',
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/src/test\\.ts$'],
 };
+
+export default config;
