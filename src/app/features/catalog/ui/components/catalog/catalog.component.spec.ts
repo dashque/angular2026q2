@@ -5,6 +5,8 @@ import { CatalogComponent } from './catalog.component';
 import { Router } from '@angular/router';
 import { routerMock } from '../../../../../shared/mocks/router/router.mock';
 import { filmFixture } from '../../../../../shared/services/film-repository/fixtures/film.fixture';
+import { FilmListFacade } from '../../../../../shared/facades/film-list/film-list.facade';
+import { filmListFacadeMock } from '../../../../../shared/facades/film-list/film-list.facade.mock';
 
 describe('CatalogComponent', () => {
   let component: CatalogComponent;
@@ -12,13 +14,16 @@ describe('CatalogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      providers: [{ provide: Router, useValue: routerMock }],
+      providers: [
+        { provide: Router, useValue: routerMock },
+        { provide: FilmListFacade, useValue: filmListFacadeMock },
+      ],
       imports: [CatalogComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CatalogComponent);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.detectChanges();
   });
 
   it('должен инициализироваться', () => {

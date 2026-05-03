@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -12,10 +12,10 @@ import { filmListFacadeMock } from '../../facades/film-list/film-list.facade.moc
 
 @Component({
   imports: [FavoriteDirective],
-  template: `<button [dashqFavorite]="film">Favorite</button>`,
+  template: `<button [dashqFavorite]="film()">Favorite</button>`,
 })
 class TestHostComponent {
-  public film: Film | null = filmFixture;
+  public readonly film = signal<Film | null>(filmFixture);
 }
 
 describe('FavoriteDirective', () => {
@@ -51,7 +51,7 @@ describe('FavoriteDirective', () => {
 
     describe('Фильм не передан', () => {
       it('не должен вызвать метод сервиса', () => {
-        fixture.componentInstance.film = null;
+        fixture.componentInstance.film.set(null);
         fixture.detectChanges();
 
         favoriteButton.click();
@@ -64,7 +64,7 @@ describe('FavoriteDirective', () => {
   describe('Хост элемент', () => {
     describe('Избранный фильм', () => {
       beforeEach(() => {
-        fixture.componentInstance.film = favoriteFilmFixture;
+        fixture.componentInstance.film.set(favoriteFilmFixture);
         fixture.detectChanges();
       });
 
@@ -79,7 +79,7 @@ describe('FavoriteDirective', () => {
 
     describe('Не избранный фильм', () => {
       beforeEach(() => {
-        fixture.componentInstance.film = filmFixture;
+        fixture.componentInstance.film.set(filmFixture);
         fixture.detectChanges();
       });
 

@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { describe, jest } from '@jest/globals';
 
 @Component({
   imports: [ThemeTogglerDirective],
@@ -10,7 +11,7 @@ import { By } from '@angular/platform-browser';
 })
 class TestHostComponent {}
 
-describe.each([0])('ThemeTogglerDirective', () => {
+describe('ThemeTogglerDirective', () => {
   let directive: ThemeTogglerDirective;
   let fixture: ComponentFixture<TestHostComponent>;
   let toggleButton: HTMLButtonElement;
@@ -23,23 +24,45 @@ describe.each([0])('ThemeTogglerDirective', () => {
     fixture.detectChanges();
     directive = fixture.debugElement.query(By.directive(ThemeTogglerDirective)).injector.get(ThemeTogglerDirective);
     toggleButton = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
+    document.body.classList.remove('dark-theme');
   });
 
   it('должна инициализироваться', () => {
     expect(directive).toBeTruthy();
   });
 
-  it('должен добавлять класс на body', () => {
-    toggleButton.click();
-    fixture.detectChanges();
+  describe('Переключение темы', () => {
+    it('должен вызывать метод переключения классов', () => {
+      const toggleSpy = jest.spyOn(document.body.classList, 'toggle');
 
-    expect(document.body.classList.contains('dark-theme')).toBeTruthy();
+      toggleButton.click();
+      fixture.detectChanges();
+
+      expect(toggleSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('должен добавлять класс на body', () => {
+      document.body.classList.remove('dark-theme');
+
+      toggleButton.click();
+      fixture.detectChanges();
+
+      expect(document.body.classList.contains('dark-theme')).toBeTruthy();
+    });
+
+    it('должен убирать класс с body', () => {
+      document.body.classList.add('dark-theme');
+
+      toggleButton.click();
+      fixture.detectChanges();
+
+      expect(document.body.classList.contains('dark-theme')).toBeFalsy();
+    });
   });
+});
 
-  it('должен убирать класс с body', () => {
-    toggleButton.click();
-    fixture.detectChanges();
-
-    expect(document.body.classList.contains('dark-theme')).toBeFalsy();
+describe('', () => {
+  it('should ', () => {
+    jest.spyOn(console, 'error').mockImplementation(() => {});
   });
 });

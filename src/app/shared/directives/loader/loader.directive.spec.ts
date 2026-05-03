@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -7,10 +7,10 @@ import { LoaderDirective } from './loader.directive';
 
 @Component({
   imports: [LoaderDirective],
-  template: `<div [dashqLoader]="isLoading"><span>content</span></div>`,
+  template: `<div [dashqLoader]="isLoading()"><span>content</span></div>`,
 })
 class TestHostComponent {
-  public isLoading = false;
+  public readonly isLoading = signal(false);
 }
 
 describe('LoaderDirective', () => {
@@ -37,7 +37,7 @@ describe('LoaderDirective', () => {
   describe('Статус загрузки true', () => {
     describe('Есть дочерний контент', () => {
       it('должен сделать его невидимым', () => {
-        fixture.componentInstance.isLoading = true;
+        fixture.componentInstance.isLoading.set(true);
         fixture.detectChanges();
 
         expect(contentElement.style.visibility).toBe('hidden');
@@ -46,7 +46,7 @@ describe('LoaderDirective', () => {
 
     describe('Хост элемент не содержит лоадер', () => {
       it('должен добавить лоадер к хост элементу', () => {
-        fixture.componentInstance.isLoading = true;
+        fixture.componentInstance.isLoading.set(true);
         fixture.detectChanges();
 
         expect(hostElement.querySelector('.loader-overlay')).toBeTruthy();
@@ -57,9 +57,9 @@ describe('LoaderDirective', () => {
   describe('Статус загрузки false', () => {
     describe('Хост элемент содержит лоадер', () => {
       it('должен удалить лоадер из хост элемента', () => {
-        fixture.componentInstance.isLoading = true;
+        fixture.componentInstance.isLoading.set(true);
         fixture.detectChanges();
-        fixture.componentInstance.isLoading = false;
+        fixture.componentInstance.isLoading.set(false);
         fixture.detectChanges();
 
         expect(hostElement.querySelector('.loader-overlay')).toBeFalsy();
@@ -68,9 +68,9 @@ describe('LoaderDirective', () => {
 
     describe('Есть дочерний контент', () => {
       it('должен сделать его видимым', () => {
-        fixture.componentInstance.isLoading = true;
+        fixture.componentInstance.isLoading.set(true);
         fixture.detectChanges();
-        fixture.componentInstance.isLoading = false;
+        fixture.componentInstance.isLoading.set(false);
         fixture.detectChanges();
 
         expect(contentElement.style.visibility).toBe('visible');

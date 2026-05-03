@@ -2,6 +2,7 @@ import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { FilmCardComponent } from './film-card.component';
+import { filmFixture } from '../../../../../../shared/services/film-repository/fixtures/film.fixture';
 
 describe('FilmCardComponent', () => {
   let component: FilmCardComponent;
@@ -14,7 +15,8 @@ describe('FilmCardComponent', () => {
 
     fixture = TestBed.createComponent(FilmCardComponent);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.componentRef.setInput('film', filmFixture);
+    fixture.detectChanges();
   });
 
   it('должен инициализироваться', () => {

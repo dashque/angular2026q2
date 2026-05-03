@@ -10,36 +10,31 @@ import { filmFixture } from '../../services/film-repository/fixtures/film.fixtur
 import { favoriteFilmFixture } from '../../services/film-repository/fixtures/favorite-film.fixture';
 import { resourceValueMock } from '../../mocks/http-resource/resource-value.mock';
 
-const recreateFilmListFacade = (): FilmListFacade => {
-  TestBed.resetTestingModule();
-  TestBed.configureTestingModule({
-    providers: [
-      FilmListFacade,
-      { provide: FilmRepositoryService, useValue: filmRepositoryServiceMock },
-      { provide: SearchFormService, useValue: searchFormServiceMock },
-    ],
-  });
-
-  return TestBed.inject(FilmListFacade);
-};
-
 describe('FilmListFacade', () => {
-  let service: FilmListFacade;
+  let facade: FilmListFacade;
 
   beforeEach(() => {
-    jest.clearAllMocks();
-    searchFormServiceMock.searchFieldValueChanges.mockReturnValue('');
-    service = recreateFilmListFacade();
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({
+      providers: [
+        FilmListFacade,
+        { provide: FilmRepositoryService, useValue: filmRepositoryServiceMock },
+        { provide: SearchFormService, useValue: searchFormServiceMock },
+      ],
+    });
+
+    facade = TestBed.inject(FilmListFacade);
   });
 
   it('должен инициализироваться', () => {
-    expect(service).toBeTruthy();
+    expect(facade).toBeTruthy();
   });
 
   describe('Получение списка фильмов', () => {
     describe('Строка поиска пустая', () => {
       it('должен возвращать полный список фильмов', () => {
-        const result = service.filmList();
+        searchFormServiceMock.searchFieldValueChanges.mockReturnValue('');
+        const result = facade.filmList();
 
         expect(result).toEqual([...filmListFixture]);
       });
@@ -48,9 +43,7 @@ describe('FilmListFacade', () => {
     describe('Строка поиска не пустая', () => {
       describe('Совпадений нет', () => {
         it('должен возвращать пустой массив', () => {
-          searchFormServiceMock.searchFieldValueChanges.mockReturnValue('no such film title');
-          const facade = recreateFilmListFacade();
-
+          searchFormServiceMock.searchFieldValueChanges.mockReturnValue('aboba');
           expect(facade.filmList()).toEqual([]);
         });
       });
@@ -59,7 +52,6 @@ describe('FilmListFacade', () => {
         it('должен возвращать только фильмы, подходящие под поиск', () => {
           resourceValueMock.mockReturnValue([filmFixture, favoriteFilmFixture]);
           searchFormServiceMock.searchFieldValueChanges.mockReturnValue('  INCEp ');
-          const facade = recreateFilmListFacade();
 
           expect(facade.filmList()).toEqual([favoriteFilmFixture]);
         });
@@ -69,7 +61,7 @@ describe('FilmListFacade', () => {
 
   describe('Изменение избранного статуса', () => {
     it('должен вызвать соответствующий метод репозитория', () => {
-      service.toggleFavorite(1);
+      facade.toggleFavorite(1);
 
       expect(filmRepositoryServiceMock.toggleFavorite).toHaveBeenNthCalledWith(1, 1);
     });
