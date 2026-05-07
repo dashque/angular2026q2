@@ -1,59 +1,94 @@
-# Angular2026q2
+# Film Collection (Angular Intro)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.8.
+## Task Context
 
-## Development server
+This repository is an implementation of the assignment:
+[Angular Intro: Film Collection](https://github.com/rolling-scopes-school/tasks/blob/master/angular/tasks/angular-intro-task/README.md).
 
-To start a local development server, run:
+![img.png](./public/img.png)
+![img_1.png](./public/img_1.png)
 
-```bash
-ng serve
+## Project Structure
+
+```text
+src/app/
+  features/
+    about/
+    catalog/
+    film-details/
+    not-found/
+  shared/
+    components/
+    models/
+    pipes/
+    resolvers/
+    services/
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Getting Started
 
-## Code scaffolding
+### 1) Install dependencies
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The workspace uses `pnpm` as package manager:
 
 ```bash
-ng generate --help
+pnpm install
 ```
 
-## Building
-
-To build the project run:
+### 2) Run application in development mode
 
 ```bash
-ng build
+pnpm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+This command starts both processes in parallel:
+- Angular dev server: `http://localhost:4200`
+- Mock API (`json-server`): `http://localhost:3001` (`/films`)
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+If you need to run services separately:
 
 ```bash
-ng test
+pnpm run ng serve
+pnpm mock:api
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### 3) Build project
 
 ```bash
-ng e2e
+pnpm build
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### 4) Run tests
+![Coverage](./badges/coverage-jest%20coverage.svg)
+![Coverage Branches](./badges/coverage-branches.svg)
+![Coverage Functions](./badges/coverage-functions.svg)
+![Coverage Lines](./badges/coverage-lines.svg)
 
-## Additional Resources
+```bash
+pnpm test
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### 5) Quality checks
+
+```bash
+pnpm type-check
+pnpm lint
+pnpm format
+```
+
+## Troubleshooting
+
+### Port `4200` or `3001` is already in use
+
+- Stop the process that uses the port, then run `pnpm start` again.
+- Or run services separately and change one of the ports manually if needed.
+
+### Films are not loaded in the catalog
+
+- Ensure mock API is running on `http://localhost:3001`.
+- Check that `http://localhost:3001/films` responds in the browser.
+- If needed, restart both processes:
+
+```bash
+pnpm start
+```

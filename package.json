@@ -1,15 +1,23 @@
 {
   "name": "angular2026q2",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "concurrently \"ng serve -o\" \"pnpm mock:api\"",
+    "mock:api": "json-server --watch mock/db.json --port 3001",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "jest",
+    "test:fast": "jest --maxWorkers=50% --passWithNoTests",
+    "test:changed": "jest -o --maxWorkers=50%",
+    "test:watch": "jest --watch --maxWorkers=50%",
+    "test:cov": "jest --coverage --coverageReporters=text-summary --coverageReporters=text --coverageReporters=json-summary --coverageReporters=lcov",
+    "lint": "eslint src --fix",
+    "format": "prettier src -w",
+    "type-check": "tsc -b --noEmit"
   },
   "private": true,
-  "packageManager": "npm@11.6.1",
   "dependencies": {
     "@angular/common": "^21.2.0",
     "@angular/compiler": "^21.2.0",
@@ -17,16 +25,37 @@
     "@angular/forms": "^21.2.0",
     "@angular/platform-browser": "^21.2.0",
     "@angular/router": "^21.2.0",
+    "globals": "^17.5.0",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0"
+    "tailwindcss": "^4.2.4",
+    "tslib": "^2.3.0",
+    "zone.js": "^0.16.1"
   },
   "devDependencies": {
     "@angular/build": "^21.2.8",
     "@angular/cli": "^21.2.8",
     "@angular/compiler-cli": "^21.2.0",
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "@tailwindcss/postcss": "^4.1.12",
+    "@types/jest": "^30.0.0",
+    "angular-eslint": "^21.3.1",
+    "concurrently": "^9.2.1",
+    "eslint": "^10.2.1",
+    "eslint-plugin-better-tailwindcss": "^4.5.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-unicorn": "^64.0.0",
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0",
+    "jest-preset-angular": "^16.1.4",
     "jsdom": "^28.0.0",
+    "json-server": "1.0.0-beta.15",
+    "postcss": "^8.5.3",
     "prettier": "^3.8.1",
+    "stylelint": "^17.9.1",
+    "stylelint-config-standard": "^40.0.0",
+    "ts-jest": "^29.4.9",
     "typescript": "~5.9.2",
-    "vitest": "^4.0.8"
+    "typescript-eslint": "^8.59.1"
   }
 }

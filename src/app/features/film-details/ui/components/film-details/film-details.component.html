@@ -1,0 +1,45 @@
+@let resource = film();
+@let isInitialLoading = resource.isLoading() && !resource.hasValue() && !resource.error();
+<div class="mx-auto flex w-full max-w-250 flex-col gap-6 px-10" [dashqLoader]="isInitialLoading">
+  @if (resource.error()) {
+    <dashq-not-found />
+  } @else if (resource.hasValue()) {
+    @if (resource.value(); as filmInfo) {
+      <div class="flex flex-col items-center gap-6 sm:flex-row">
+        <img
+          class="rounded-lg border border-border"
+          [alt]="filmInfo.title"
+          [ngSrc]="filmInfo.posterUrl"
+          width="259"
+          height="383"
+          priority
+        />
+        <div class="flex flex-row flex-wrap gap-2 text-3xl sm:flex-col">
+          <div>
+            <div class="text-7xl font-semibold">{{ filmInfo.title }}</div>
+            <div class="text-text-secondary">{{ filmInfo.year }}</div>
+          </div>
+          <div class="text-info">{{ filmInfo.genre }}</div>
+          <div class="text-green-primary">{{ filmInfo.rating }}</div>
+          <div class="text-warning">{{ filmInfo.duration | duration }}</div>
+        </div>
+      </div>
+      <div class="flex items-center justify-between gap-4 rounded-md border border-border bg-border px-4 py-3">
+        <div class="flex-1 text-center text-text-secondary">{{ filmInfo.description }}</div>
+        <button [dashqFavorite]="filmInfo" type="button">
+          <span class="sr-only">Favorite</span>
+        </button>
+      </div>
+      <div class="flex w-full justify-center">
+        <a
+          routerLink="/"
+          class="hover:bg-surface mt-6 inline-flex items-center justify-center rounded-md border-2 border-pink-primary px-4 py-2 text-pink-primary transition hover:text-pink-hover"
+        >
+          Back to Home
+        </a>
+      </div>
+    } @else {
+      <dashq-not-found />
+    }
+  }
+</div>

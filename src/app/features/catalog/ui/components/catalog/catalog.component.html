@@ -1,0 +1,20 @@
+@let isInitialLoading = isLoading() && filmList().length === 0;
+<div class="flex w-full flex-col gap-4">
+  <form class="mx-auto w-full max-w-2xl py-3">
+    <input
+      [formControl]="searchControl"
+      placeholder="Search"
+      class="w-full rounded-sm border-2 border-border p-2 placeholder:text-text-secondary focus:ring-2 focus:ring-focus-ring focus:outline-none"
+      type="text"
+    />
+  </form>
+  <div [dashqLoader]="isInitialLoading">
+    <div class="flex flex-wrap justify-center gap-4">
+      @for (film of filmList(); track film.id) {
+        <dashq-film-card [film]="film" (cardClicked)="onCardClick($event)" />
+      } @empty {
+        <div class="rounded-md border border-warning px-4 py-2 text-warning">Nothing found</div>
+      }
+    </div>
+  </div>
+</div>

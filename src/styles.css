@@ -1,1 +1,117 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss';
+
+@theme {
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-surface: var(--bg-surface);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-border: var(--border);
+
+  --color-pink-primary: var(--pink-primary);
+  --color-pink-hover: var(--pink-hover);
+  --color-pink-soft: var(--pink-soft);
+
+  --color-green-primary: var(--green-primary);
+  --color-green-hover: var(--green-hover);
+  --color-green-soft: var(--green-soft);
+
+  --color-gray-light: var(--gray-light);
+  --color-gray-medium: var(--gray-medium);
+  --color-gray-dark: var(--gray-dark);
+
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-info: var(--info);
+  --color-focus-ring: var(--focus-ring-color);
+
+  --shadow-card: var(--shadow-card);
+}
+
+:root {
+  /* Base */
+  --bg-primary: #f8f9fb;
+  --bg-surface: #ffffff;
+  --text-primary: #1f1f24;
+  --text-secondary: #6b7280;
+  --border: #e5e7eb;
+
+  /* Pink */
+  --pink-primary: #e85d9e;
+  --pink-hover: #d94c8e;
+  --pink-soft: #fce7f3;
+
+  /* Green */
+  --green-primary: #2fa86e;
+  --green-hover: #258a5a;
+  --green-soft: #dcfce7;
+
+  /* Gray */
+  --gray-light: #f3f4f6;
+  --gray-medium: #9ca3af;
+  --gray-dark: #4b5563;
+
+  /* Extra semantic */
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --info: #3b82f6;
+
+  /* Optional UI tokens */
+  --shadow-card: 0 4px 20px rgba(31, 31, 36, 0.08);
+  --focus-ring-color: rgba(232, 93, 158, 0.3);
+  --focus-ring: 0 0 0 3px rgba(232, 93, 158, 0.3);
+}
+
+.dark-theme {
+  /* Base */
+  --bg-primary: #121317;
+  --bg-surface: #1b1d23;
+  --text-primary: #eae9e9;
+  --text-secondary: #a1a1aa;
+  --border: #2a2d35;
+
+  /* Pink */
+  --pink-primary: #f472b6;
+  --pink-hover: #ec4899;
+  --pink-soft: #3a1f2f;
+
+  /* Green */
+  --green-primary: #4ade80;
+  --green-hover: #22c55e;
+  --green-soft: #1a3023;
+
+  /* Gray */
+  --gray-light: #d1d5db;
+  --gray-medium: #6b7280;
+  --gray-dark: #2f3542;
+
+  /* Extra semantic */
+  --warning: #fbbf24;
+  --error: #f87171;
+  --info: #60a5fa;
+
+  /* Optional UI tokens */
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --focus-ring-color: rgba(244, 114, 182, 0.35);
+  --focus-ring: 0 0 0 3px rgba(244, 114, 182, 0.35);
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.loader-container {
+  @apply m-auto flex flex-col items-center gap-3;
+}
+
+.loader-overlay {
+  @apply fixed inset-0 z-10 flex bg-gray-600/60 backdrop-blur-xs backdrop-filter;
+}
+
+.loader-spinner {
+  @apply border-border border-r-pink-primary h-7 w-7 animate-spin rounded-full border-3;
+}
+
+a {
+  @apply no-underline hover:underline hover:text-pink-primary;
+}

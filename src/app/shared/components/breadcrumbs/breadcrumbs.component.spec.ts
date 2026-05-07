@@ -1,0 +1,23 @@
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+
+import { BreadcrumbsComponent } from './breadcrumbs.component';
+
+describe('BreadcrumbsComponent', () => {
+  let component: BreadcrumbsComponent;
+  let fixture: ComponentFixture<BreadcrumbsComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [BreadcrumbsComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(BreadcrumbsComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+  // TODO add tests
+  it('должен инициализироваться', () => {
+    expect(component).toBeTruthy();
+  });
+});

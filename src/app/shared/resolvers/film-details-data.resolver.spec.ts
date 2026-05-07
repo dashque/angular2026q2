@@ -1,0 +1,100 @@
+import { TestBed } from '@angular/core/testing';
+import type {
+  ActivatedRouteSnapshot,
+  MaybeAsync,
+  RedirectCommand,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
+import { Router } from '@angular/router';
+import { FilmRepositoryService } from '../services/film-repository/services/film-repository.service';
+import { filmDetailsDataResolver } from './film-details-data.resolver';
+import { routerMock } from '../mocks/router/router.mock';
+import { filmRepositoryServiceMock } from '../services/film-repository/services/film-repository.service.mock';
+import { activatedRouteSnapshotMock } from '../mocks/activated-route/activated-route-snapshot.mock';
+import type { HttpResourceRef } from '@angular/common/http';
+import type { Film } from '../models/film.model';
+import { filmFixture } from '../services/film-repository/fixtures/film.fixture';
+
+describe('filmDetailsDataResolver', () => {
+  let result: MaybeAsync<UrlTree | HttpResourceRef<Film | null> | RedirectCommand>;
+  const routerStateSnapshotFixture = {} as RouterStateSnapshot;
+
+  const validSnapshotFixture = {
+    paramMap: {
+      get: jest.fn(() => {
+        return '1';
+      }),
+    },
+  } as unknown as ActivatedRouteSnapshot;
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: Router, useValue: routerMock },
+        { provide: FilmRepositoryService, useValue: filmRepositoryServiceMock },
+      ],
+    });
+  });
+
+  describe('Id валидный', () => {
+    beforeEach(() => {
+      result = TestBed.runInInjectionContext(() => {
+        return filmDetailsDataResolver(validSnapshotFixture, routerStateSnapshotFixture);
+      });
+    });
+
+    it('должен вернуть фильм', () => {
+      expect(result).toBe(filmFixture);
+    });
+
+    it('должен вызывать метод репозитория', () => {
+      expect(filmRepositoryServiceMock.getFilmDetails).toHaveBeenNthCalledWith(1, 1);
+    });
+
+    it('не должен перенаправить на главную страницу', () => {
+      expect(routerMock.createUrlTree).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Id отсутствует', () => {
+    beforeEach(() => {
+      TestBed.runInInjectionContext(() => {
+        return filmDetailsDataResolver(activatedRouteSnapshotMock, routerStateSnapshotFixture);
+      });
+    });
+
+    it('должен перенаправить на главную страницу', () => {
+      expect(routerMock.createUrlTree).toHaveBeenNthCalledWith(1, ['/']);
+    });
+
+    it('не должен вызывать метод репозитория', () => {
+      expect(filmRepositoryServiceMock.getFilmDetails).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Id не является числом', () => {
+    const snapshotFixture = {
+      paramMap: {
+        get: jest.fn(() => {
+          return 'abc';
+        }),
+      },
+    } as unknown as ActivatedRouteSnapshot;
+
+    beforeEach(() => {
+      TestBed.runInInjectionContext(() => {
+        return filmDetailsDataResolver(snapshotFixture, routerStateSnapshotFixture);
+      });
+    });
+
+    it('должен перенаправить на главную страницу', () => {
+      expect(routerMock.createUrlTree).toHaveBeenNthCalledWith(1, ['/']);
+    });
+
+    it('не должен вызывать метод репозитория', () => {
+      expect(filmRepositoryServiceMock.getFilmDetails).not.toHaveBeenCalled();
+    });
+  });
+});
